@@ -16,5 +16,47 @@ namespace AsignacionAcademica
         {
             InitializeComponent();
         }
+
+        private void btnProfesores_Click(object sender, EventArgs e)
+        {
+            FormProfesores formProfesores = new FormProfesores();
+            formProfesores.Show();
+            this.Hide();
+        }
+
+        private void btnAulas_Click(object sender, EventArgs e)
+        {
+            FormAulas formAulas = new FormAulas();
+            formAulas.Show();
+            this.Hide();
+        }
+
+        private void btnAsignaturas_Click(object sender, EventArgs e)
+        {
+            FormAsignaturas formAsignaturas = new FormAsignaturas();
+            formAsignaturas.Show();
+            this.Hide();
+        }
+
+        private void btnGrupos_Click(object sender, EventArgs e)
+        {
+            FormGrupos formGrupos = new FormGrupos();
+            formGrupos.Show();
+            this.Hide();
+        }
+
+        private void btnAsignarClases_Click(object sender, EventArgs e)
+        {
+            FormAsignaciones formAsignarClases = new FormAsignaciones();
+            formAsignarClases.Show();
+            this.Hide();
+        }
+
+        private void btnConsultarAsignaciones_Click(object sender, EventArgs e)
+        {
+            FormConsultarAsignaciones formConsultarAsignaciones = new FormConsultarAsignaciones();
+            formConsultarAsignaciones.Show();
+            this.Hide();
+        }
     }
 }
