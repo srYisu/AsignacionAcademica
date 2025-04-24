@@ -54,9 +54,14 @@ namespace AsignacionAcademica
 
         private void btnConsultarAsignaciones_Click(object sender, EventArgs e)
         {
-            FormConsultarAsignaciones formConsultarAsignaciones = new FormConsultarAsignaciones();
+            FormConsultaAsignaciones formConsultarAsignaciones = new FormConsultaAsignaciones();
             formConsultarAsignaciones.Show();
             this.Hide();
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

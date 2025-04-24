@@ -16,5 +16,12 @@ namespace AsignacionAcademica
         {
             InitializeComponent();
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            FormMenuPrincipal formMenuPrincipal = new FormMenuPrincipal();
+            formMenuPrincipal.Show();
+            this.Hide();
+        }
     }
 }

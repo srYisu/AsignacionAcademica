@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AsignacionAcademica
 {
-    public partial class FormGrupos : Form
+    public partial class FormConsultaAsignaciones : Form
     {
-        public FormGrupos()
+        public FormConsultaAsignaciones()
         {
             InitializeComponent();
         }
