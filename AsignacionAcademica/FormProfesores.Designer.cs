@@ -28,186 +28,202 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            textBox1 = new TextBox();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            label3 = new Label();
-            textBox3 = new TextBox();
-            label4 = new Label();
-            checkBox1 = new CheckBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            dataGridView1 = new DataGridView();
-            btnSalir = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            lblNombre = new Label();
+            txtNombre = new TextBox();
+            lblEspecialidad = new Label();
+            txtEspecialidad = new TextBox();
+            cboxDisponible = new CheckBox();
+            btnGuardar = new Button();
+            btnActualizar = new Button();
+            btnEliminar = new Button();
+            btnLimpiar = new Button();
+            dgvProfesores = new DataGridView();
+            txtApellidoMaterno = new TextBox();
+            lblApellidoMaterno = new Label();
+            txtApellidoPaterno = new TextBox();
+            lblApellidoPaterno = new Label();
+            lblDisponibilidad = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvProfesores).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblNombre
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(32, 32);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(32, 32);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(64, 15);
+            lblNombre.TabIndex = 0;
+            lblNombre.Text = "Nombre(s)";
             // 
-            // textBox1
+            // txtNombre
             // 
-            textBox1.Location = new Point(32, 50);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(159, 23);
-            textBox1.TabIndex = 1;
+            txtNombre.Location = new Point(32, 50);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(159, 23);
+            txtNombre.TabIndex = 1;
+            txtNombre.TextChanged += textBox1_TextChanged;
             // 
-            // label2
+            // lblEspecialidad
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(32, 98);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 2;
-            label2.Text = "label2";
+            lblEspecialidad.AutoSize = true;
+            lblEspecialidad.Location = new Point(32, 234);
+            lblEspecialidad.Name = "lblEspecialidad";
+            lblEspecialidad.Size = new Size(65, 15);
+            lblEspecialidad.TabIndex = 2;
+            lblEspecialidad.Text = "Especialida";
             // 
-            // textBox2
+            // txtEspecialidad
             // 
-            textBox2.Location = new Point(32, 116);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(159, 23);
-            textBox2.TabIndex = 3;
+            txtEspecialidad.Location = new Point(32, 252);
+            txtEspecialidad.Name = "txtEspecialidad";
+            txtEspecialidad.Size = new Size(159, 23);
+            txtEspecialidad.TabIndex = 3;
             // 
-            // label3
+            // cboxDisponible
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(32, 166);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 4;
-            label3.Text = "label3";
+            cboxDisponible.AutoSize = true;
+            cboxDisponible.Location = new Point(32, 313);
+            cboxDisponible.Name = "cboxDisponible";
+            cboxDisponible.Size = new Size(82, 19);
+            cboxDisponible.TabIndex = 7;
+            cboxDisponible.Text = "Disponible";
+            cboxDisponible.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // btnGuardar
             // 
-            textBox3.Location = new Point(32, 184);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(159, 23);
-            textBox3.TabIndex = 5;
+            btnGuardar.Location = new Point(250, 49);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.TabIndex = 8;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // btnActualizar
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(32, 236);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 6;
-            label4.Text = "label4";
+            btnActualizar.Location = new Point(250, 78);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 9;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // btnEliminar
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(32, 254);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(83, 19);
-            checkBox1.TabIndex = 7;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            btnEliminar.Location = new Point(250, 107);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(75, 23);
+            btnEliminar.TabIndex = 10;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += button3_Click;
             // 
-            // button1
+            // btnLimpiar
             // 
-            button1.Location = new Point(249, 32);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 8;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnLimpiar.Location = new Point(250, 136);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(75, 23);
+            btnLimpiar.TabIndex = 11;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // dgvProfesores
             // 
-            button2.Location = new Point(249, 61);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 9;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            dgvProfesores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProfesores.Location = new Point(350, 32);
+            dgvProfesores.Name = "dgvProfesores";
+            dgvProfesores.Size = new Size(569, 273);
+            dgvProfesores.TabIndex = 12;
             // 
-            // button3
+            // txtApellidoMaterno
             // 
-            button3.Location = new Point(249, 90);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 10;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            txtApellidoMaterno.Location = new Point(32, 183);
+            txtApellidoMaterno.Name = "txtApellidoMaterno";
+            txtApellidoMaterno.Size = new Size(159, 23);
+            txtApellidoMaterno.TabIndex = 17;
             // 
-            // button4
+            // lblApellidoMaterno
             // 
-            button4.Location = new Point(249, 119);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 11;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            lblApellidoMaterno.AutoSize = true;
+            lblApellidoMaterno.Location = new Point(32, 165);
+            lblApellidoMaterno.Name = "lblApellidoMaterno";
+            lblApellidoMaterno.Size = new Size(99, 15);
+            lblApellidoMaterno.TabIndex = 16;
+            lblApellidoMaterno.Text = "Apellido Materno";
             // 
-            // dataGridView1
+            // txtApellidoPaterno
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(395, 32);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(486, 261);
-            dataGridView1.TabIndex = 12;
+            txtApellidoPaterno.Location = new Point(32, 115);
+            txtApellidoPaterno.Name = "txtApellidoPaterno";
+            txtApellidoPaterno.Size = new Size(159, 23);
+            txtApellidoPaterno.TabIndex = 15;
             // 
-            // btnSalir
+            // lblApellidoPaterno
             // 
-            btnSalir.Location = new Point(897, 526);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 23);
-            btnSalir.TabIndex = 13;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            btnSalir.Click += btnSalir_Click;
+            lblApellidoPaterno.AutoSize = true;
+            lblApellidoPaterno.Location = new Point(32, 97);
+            lblApellidoPaterno.Name = "lblApellidoPaterno";
+            lblApellidoPaterno.Size = new Size(95, 15);
+            lblApellidoPaterno.TabIndex = 14;
+            lblApellidoPaterno.Text = "Apellido paterno";
+            // 
+            // lblDisponibilidad
+            // 
+            lblDisponibilidad.AutoSize = true;
+            lblDisponibilidad.Location = new Point(35, 290);
+            lblDisponibilidad.Name = "lblDisponibilidad";
+            lblDisponibilidad.Size = new Size(83, 15);
+            lblDisponibilidad.TabIndex = 18;
+            lblDisponibilidad.Text = "Disponibilidad";
+            lblDisponibilidad.Click += label1_Click;
             // 
             // FormProfesores
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 561);
-            Controls.Add(btnSalir);
-            Controls.Add(dataGridView1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(checkBox1);
-            Controls.Add(label4);
-            Controls.Add(textBox3);
-            Controls.Add(label3);
-            Controls.Add(textBox2);
-            Controls.Add(label2);
-            Controls.Add(textBox1);
-            Controls.Add(label1);
+            ClientSize = new Size(931, 559);
+            Controls.Add(lblDisponibilidad);
+            Controls.Add(txtApellidoMaterno);
+            Controls.Add(lblApellidoMaterno);
+            Controls.Add(txtApellidoPaterno);
+            Controls.Add(lblApellidoPaterno);
+            Controls.Add(dgvProfesores);
+            Controls.Add(btnLimpiar);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnActualizar);
+            Controls.Add(btnGuardar);
+            Controls.Add(cboxDisponible);
+            Controls.Add(txtEspecialidad);
+            Controls.Add(lblEspecialidad);
+            Controls.Add(txtNombre);
+            Controls.Add(lblNombre);
             Name = "FormProfesores";
             Text = "FormProfesores";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += FormProfesores_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvProfesores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private TextBox textBox1;
-        private Label label2;
-        private TextBox textBox2;
+        private Label lblNombre;
+        private TextBox txtNombre;
+        private Label lblEspecialidad;
+        private TextBox txtEspecialidad;
         private Label label3;
         private TextBox textBox3;
         private Label label4;
         private CheckedListBox checkedListBox1;
-        private CheckBox checkBox1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private DataGridView dataGridView1;
-        private Button btnSalir;
+        private CheckBox cboxDisponible;
+        private Button btnGuardar;
+        private Button btnActualizar;
+        private Button btnEliminar;
+        private Button btnLimpiar;
+        private DataGridView dgvProfesores;
+        private TextBox txtApellidoMaterno;
+        private Label lblApellidoMaterno;
+        private TextBox txtApellidoPaterno;
+        private Label lblApellidoPaterno;
+        private Label lblDisponibilidad;
     }
 }

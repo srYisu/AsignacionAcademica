@@ -12,6 +12,8 @@ namespace AsignacionAcademica
 {
     public partial class FormMenuPrincipal : Form
     {
+
+        AbrirForms open = new AbrirForms();
         public FormMenuPrincipal()
         {
             InitializeComponent();
@@ -20,43 +22,37 @@ namespace AsignacionAcademica
         private void btnProfesores_Click(object sender, EventArgs e)
         {
             FormProfesores formProfesores = new FormProfesores();
-            formProfesores.Show();
-            this.Hide();
+            open.AbrirFormPanel(this.pnlBase, formProfesores);
         }
 
         private void btnAulas_Click(object sender, EventArgs e)
         {
             FormAulas formAulas = new FormAulas();
-            formAulas.Show();
-            this.Hide();
+            open.AbrirFormPanel(this.pnlBase, formAulas);
         }
 
         private void btnAsignaturas_Click(object sender, EventArgs e)
         {
             FormAsignaturas formAsignaturas = new FormAsignaturas();
-            formAsignaturas.Show();
-            this.Hide();
+            open.AbrirFormPanel(this.pnlBase, formAsignaturas);
         }
 
         private void btnGrupos_Click(object sender, EventArgs e)
         {
             FormGrupos formGrupos = new FormGrupos();
-            formGrupos.Show();
-            this.Hide();
+            open.AbrirFormPanel(this.pnlBase, formGrupos);
         }
 
         private void btnAsignarClases_Click(object sender, EventArgs e)
         {
             FormAsignaciones formAsignarClases = new FormAsignaciones();
-            formAsignarClases.Show();
-            this.Hide();
+            open.AbrirFormPanel(this.pnlBase, formAsignarClases);
         }
 
         private void btnConsultarAsignaciones_Click(object sender, EventArgs e)
         {
             FormConsultaAsignaciones formConsultarAsignaciones = new FormConsultaAsignaciones();
-            formConsultarAsignaciones.Show();
-            this.Hide();
+            open.AbrirFormPanel(this.pnlBase, formConsultarAsignaciones);
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

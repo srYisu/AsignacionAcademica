@@ -28,181 +28,172 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            dataGridView1 = new DataGridView();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
-            label4 = new Label();
-            textBox4 = new TextBox();
-            btnSalir = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            btnGuardar = new Button();
+            btnActualizar = new Button();
+            btnEliminar = new Button();
+            btnLimpiar = new Button();
+            dgvAulas = new DataGridView();
+            lblUbicacion = new Label();
+            lblCapacidad = new Label();
+            lblNombreAula = new Label();
+            txtUbicación = new TextBox();
+            txtCapacidad = new TextBox();
+            txtNombreAula = new TextBox();
+            lblDisponibilidad = new Label();
+            cboxDisponible = new CheckBox();
+            ((System.ComponentModel.ISupportInitialize)dgvAulas).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnGuardar
             // 
-            button1.Location = new Point(219, 45);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 6;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnGuardar.Location = new Point(220, 66);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.TabIndex = 6;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnActualizar
             // 
-            button2.Location = new Point(219, 74);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 7;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnActualizar.Location = new Point(220, 95);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 7;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnEliminar
             // 
-            button3.Location = new Point(219, 103);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 8;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnEliminar.Location = new Point(220, 124);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(75, 23);
+            btnEliminar.TabIndex = 8;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnLimpiar
             // 
-            button4.Location = new Point(219, 132);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 9;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            btnLimpiar.Location = new Point(220, 153);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(75, 23);
+            btnLimpiar.TabIndex = 9;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvAulas
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(403, 55);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(240, 150);
-            dataGridView1.TabIndex = 10;
+            dgvAulas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAulas.Location = new Point(330, 49);
+            dgvAulas.Name = "dgvAulas";
+            dgvAulas.Size = new Size(589, 207);
+            dgvAulas.TabIndex = 10;
             // 
-            // label3
+            // lblUbicacion
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(22, 181);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 24;
-            label3.Text = "label3";
+            lblUbicacion.AutoSize = true;
+            lblUbicacion.Location = new Point(22, 181);
+            lblUbicacion.Name = "lblUbicacion";
+            lblUbicacion.Size = new Size(60, 15);
+            lblUbicacion.TabIndex = 24;
+            lblUbicacion.Text = "Ubicación";
             // 
-            // label2
+            // lblCapacidad
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(22, 114);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 23;
-            label2.Text = "label2";
+            lblCapacidad.AutoSize = true;
+            lblCapacidad.Location = new Point(22, 114);
+            lblCapacidad.Name = "lblCapacidad";
+            lblCapacidad.Size = new Size(63, 15);
+            lblCapacidad.TabIndex = 23;
+            lblCapacidad.Text = "Capacidad";
             // 
-            // label1
+            // lblNombreAula
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(22, 49);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 22;
-            label1.Text = "label1";
+            lblNombreAula.AutoSize = true;
+            lblNombreAula.Location = new Point(22, 49);
+            lblNombreAula.Name = "lblNombreAula";
+            lblNombreAula.Size = new Size(95, 15);
+            lblNombreAula.TabIndex = 22;
+            lblNombreAula.Text = "Nombre del aula";
             // 
-            // textBox3
+            // txtUbicación
             // 
-            textBox3.Location = new Point(22, 199);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(159, 23);
-            textBox3.TabIndex = 21;
+            txtUbicación.Location = new Point(22, 199);
+            txtUbicación.Name = "txtUbicación";
+            txtUbicación.Size = new Size(159, 23);
+            txtUbicación.TabIndex = 21;
             // 
-            // textBox2
+            // txtCapacidad
             // 
-            textBox2.Location = new Point(22, 132);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(159, 23);
-            textBox2.TabIndex = 20;
+            txtCapacidad.Location = new Point(22, 132);
+            txtCapacidad.Name = "txtCapacidad";
+            txtCapacidad.Size = new Size(159, 23);
+            txtCapacidad.TabIndex = 20;
             // 
-            // textBox1
+            // txtNombreAula
             // 
-            textBox1.Location = new Point(22, 67);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(159, 23);
-            textBox1.TabIndex = 19;
+            txtNombreAula.Location = new Point(22, 67);
+            txtNombreAula.Name = "txtNombreAula";
+            txtNombreAula.Size = new Size(159, 23);
+            txtNombreAula.TabIndex = 19;
             // 
-            // label4
+            // lblDisponibilidad
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(22, 249);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 26;
-            label4.Text = "label4";
+            lblDisponibilidad.AutoSize = true;
+            lblDisponibilidad.Location = new Point(25, 241);
+            lblDisponibilidad.Name = "lblDisponibilidad";
+            lblDisponibilidad.Size = new Size(83, 15);
+            lblDisponibilidad.TabIndex = 29;
+            lblDisponibilidad.Text = "Disponibilidad";
             // 
-            // textBox4
+            // cboxDisponible
             // 
-            textBox4.Location = new Point(22, 267);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(159, 23);
-            textBox4.TabIndex = 25;
-            // 
-            // btnSalir
-            // 
-            btnSalir.Location = new Point(897, 526);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 23);
-            btnSalir.TabIndex = 27;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            btnSalir.Click += btnSalir_Click;
+            cboxDisponible.AutoSize = true;
+            cboxDisponible.Location = new Point(22, 264);
+            cboxDisponible.Name = "cboxDisponible";
+            cboxDisponible.Size = new Size(82, 19);
+            cboxDisponible.TabIndex = 28;
+            cboxDisponible.Text = "Disponible";
+            cboxDisponible.UseVisualStyleBackColor = true;
             // 
             // FormAulas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 561);
-            Controls.Add(btnSalir);
-            Controls.Add(label4);
-            Controls.Add(textBox4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(dataGridView1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(931, 559);
+            Controls.Add(lblDisponibilidad);
+            Controls.Add(cboxDisponible);
+            Controls.Add(lblUbicacion);
+            Controls.Add(lblCapacidad);
+            Controls.Add(lblNombreAula);
+            Controls.Add(txtUbicación);
+            Controls.Add(txtCapacidad);
+            Controls.Add(txtNombreAula);
+            Controls.Add(dgvAulas);
+            Controls.Add(btnLimpiar);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnActualizar);
+            Controls.Add(btnGuardar);
             Name = "FormAulas";
             Text = "FormAulas";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += FormAulas_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvAulas).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private DataGridView dataGridView1;
-        private Label label3;
-        private Label label2;
-        private Label label1;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private Label label4;
-        private TextBox textBox4;
-        private Button btnSalir;
+        private Button btnGuardar;
+        private Button btnActualizar;
+        private Button btnEliminar;
+        private Button btnLimpiar;
+        private DataGridView dgvAulas;
+        private Label lblUbicacion;
+        private Label lblCapacidad;
+        private Label lblNombreAula;
+        private TextBox txtUbicación;
+        private TextBox txtCapacidad;
+        private TextBox txtNombreAula;
+        private Label lblDisponibilidad;
+        private CheckBox cboxDisponible;
     }
 }

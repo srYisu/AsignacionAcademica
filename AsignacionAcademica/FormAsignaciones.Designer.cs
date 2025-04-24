@@ -32,20 +32,22 @@
             comboBox2 = new ComboBox();
             comboBox3 = new ComboBox();
             comboBox4 = new ComboBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            lblGrupo = new Label();
+            lblProfesor = new Label();
+            lblAula = new Label();
+            lblAsignatura = new Label();
             dateTimePicker1 = new DateTimePicker();
             dateTimePicker2 = new DateTimePicker();
             comboBox5 = new ComboBox();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
-            dataGridView1 = new DataGridView();
-            btnSalir = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dgvClases = new DataGridView();
+            btnLimpiar = new Button();
+            btnEliminar = new Button();
+            btnActualizar = new Button();
+            btnGuardar = new Button();
+            lblHoraInicio = new Label();
+            lblHoraFin = new Label();
+            lblDias = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvClases).BeginInit();
             SuspendLayout();
             // 
             // comboBox1
@@ -80,41 +82,41 @@
             comboBox4.Size = new Size(170, 23);
             comboBox4.TabIndex = 3;
             // 
-            // label1
+            // lblGrupo
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(27, 43);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 4;
-            label1.Text = "label1";
+            lblGrupo.AutoSize = true;
+            lblGrupo.Location = new Point(27, 43);
+            lblGrupo.Name = "lblGrupo";
+            lblGrupo.Size = new Size(40, 15);
+            lblGrupo.TabIndex = 4;
+            lblGrupo.Text = "Grupo";
             // 
-            // label2
+            // lblProfesor
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(27, 107);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 5;
-            label2.Text = "label2";
+            lblProfesor.AutoSize = true;
+            lblProfesor.Location = new Point(27, 107);
+            lblProfesor.Name = "lblProfesor";
+            lblProfesor.Size = new Size(51, 15);
+            lblProfesor.TabIndex = 5;
+            lblProfesor.Text = "Profesor";
             // 
-            // label3
+            // lblAula
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(27, 172);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 6;
-            label3.Text = "label3";
+            lblAula.AutoSize = true;
+            lblAula.Location = new Point(27, 172);
+            lblAula.Name = "lblAula";
+            lblAula.Size = new Size(31, 15);
+            lblAula.TabIndex = 6;
+            lblAula.Text = "Aula";
             // 
-            // label4
+            // lblAsignatura
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(27, 239);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 7;
-            label4.Text = "label4";
+            lblAsignatura.AutoSize = true;
+            lblAsignatura.Location = new Point(27, 239);
+            lblAsignatura.Name = "lblAsignatura";
+            lblAsignatura.Size = new Size(64, 15);
+            lblAsignatura.TabIndex = 7;
+            lblAsignatura.Text = "Asignatura";
             // 
             // dateTimePicker1
             // 
@@ -133,90 +135,109 @@
             // comboBox5
             // 
             comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(27, 454);
+            comboBox5.Location = new Point(27, 453);
             comboBox5.Name = "comboBox5";
             comboBox5.Size = new Size(170, 23);
             comboBox5.TabIndex = 10;
             // 
-            // button4
+            // dgvClases
             // 
-            button4.Location = new Point(290, 136);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 15;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            dgvClases.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClases.Location = new Point(372, 43);
+            dgvClases.Name = "dgvClases";
+            dgvClases.Size = new Size(547, 237);
+            dgvClases.TabIndex = 16;
             // 
-            // button3
+            // btnLimpiar
             // 
-            button3.Location = new Point(290, 107);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 14;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnLimpiar.Location = new Point(230, 147);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(75, 23);
+            btnLimpiar.TabIndex = 21;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnEliminar
             // 
-            button2.Location = new Point(290, 78);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 13;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnEliminar.Location = new Point(230, 118);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(75, 23);
+            btnEliminar.TabIndex = 20;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnActualizar
             // 
-            button1.Location = new Point(290, 49);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 12;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnActualizar.Location = new Point(230, 89);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 19;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // btnGuardar
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(440, 49);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(240, 150);
-            dataGridView1.TabIndex = 16;
+            btnGuardar.Location = new Point(230, 60);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.TabIndex = 18;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // btnSalir
+            // lblHoraInicio
             // 
-            btnSalir.Location = new Point(897, 526);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 23);
-            btnSalir.TabIndex = 17;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            btnSalir.Click += btnSalir_Click;
+            lblHoraInicio.AutoSize = true;
+            lblHoraInicio.Location = new Point(27, 303);
+            lblHoraInicio.Name = "lblHoraInicio";
+            lblHoraInicio.Size = new Size(81, 15);
+            lblHoraInicio.TabIndex = 22;
+            lblHoraInicio.Text = "Hora de inicio";
+            // 
+            // lblHoraFin
+            // 
+            lblHoraFin.AutoSize = true;
+            lblHoraFin.Location = new Point(27, 370);
+            lblHoraFin.Name = "lblHoraFin";
+            lblHoraFin.Size = new Size(112, 15);
+            lblHoraFin.TabIndex = 23;
+            lblHoraFin.Text = "Hora de finalización";
+            // 
+            // lblDias
+            // 
+            lblDias.AutoSize = true;
+            lblDias.Location = new Point(27, 435);
+            lblDias.Name = "lblDias";
+            lblDias.Size = new Size(24, 15);
+            lblDias.TabIndex = 24;
+            lblDias.Text = "Dia";
             // 
             // FormAsignaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 561);
-            Controls.Add(btnSalir);
-            Controls.Add(dataGridView1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(931, 559);
+            Controls.Add(lblDias);
+            Controls.Add(lblHoraFin);
+            Controls.Add(lblHoraInicio);
+            Controls.Add(btnLimpiar);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnActualizar);
+            Controls.Add(btnGuardar);
+            Controls.Add(dgvClases);
             Controls.Add(comboBox5);
             Controls.Add(dateTimePicker2);
             Controls.Add(dateTimePicker1);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblAsignatura);
+            Controls.Add(lblAula);
+            Controls.Add(lblProfesor);
+            Controls.Add(lblGrupo);
             Controls.Add(comboBox4);
             Controls.Add(comboBox3);
             Controls.Add(comboBox2);
             Controls.Add(comboBox1);
             Name = "FormAsignaciones";
             Text = "FormAsignaciones";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClases).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -227,18 +248,20 @@
         private ComboBox comboBox2;
         private ComboBox comboBox3;
         private ComboBox comboBox4;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
+        private Label lblGrupo;
+        private Label lblProfesor;
+        private Label lblAula;
+        private Label lblAsignatura;
         private DateTimePicker dateTimePicker1;
         private DateTimePicker dateTimePicker2;
         private ComboBox comboBox5;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
-        private DataGridView dataGridView1;
-        private Button btnSalir;
+        private DataGridView dgvClases;
+        private Button btnLimpiar;
+        private Button btnEliminar;
+        private Button btnActualizar;
+        private Button btnGuardar;
+        private Label lblHoraInicio;
+        private Label lblHoraFin;
+        private Label lblDias;
     }
 }

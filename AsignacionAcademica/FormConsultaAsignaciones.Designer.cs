@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             comboBox1 = new ComboBox();
-            label1 = new Label();
-            comboBox2 = new ComboBox();
-            button1 = new Button();
-            dataGridView1 = new DataGridView();
-            btnSalir = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            lblFiltros = new Label();
+            cmbFiltro = new ComboBox();
+            btnBuscar = new Button();
+            dgvConsulta = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvConsulta).BeginInit();
             SuspendLayout();
             // 
             // comboBox1
@@ -45,64 +44,53 @@
             comboBox1.Size = new Size(0, 23);
             comboBox1.TabIndex = 0;
             // 
-            // label1
+            // lblFiltros
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(23, 31);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 6;
-            label1.Text = "label1";
+            lblFiltros.AutoSize = true;
+            lblFiltros.Location = new Point(23, 31);
+            lblFiltros.Name = "lblFiltros";
+            lblFiltros.Size = new Size(61, 15);
+            lblFiltros.TabIndex = 6;
+            lblFiltros.Text = "Filtrar por:";
             // 
-            // comboBox2
+            // cmbFiltro
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(23, 49);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(170, 23);
-            comboBox2.TabIndex = 5;
+            cmbFiltro.FormattingEnabled = true;
+            cmbFiltro.Location = new Point(23, 49);
+            cmbFiltro.Name = "cmbFiltro";
+            cmbFiltro.Size = new Size(170, 23);
+            cmbFiltro.TabIndex = 5;
             // 
-            // button1
+            // btnBuscar
             // 
-            button1.Location = new Point(23, 78);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 7;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnBuscar.Location = new Point(23, 78);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(75, 23);
+            btnBuscar.TabIndex = 7;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvConsulta
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(371, 31);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(240, 150);
-            dataGridView1.TabIndex = 8;
-            // 
-            // btnSalir
-            // 
-            btnSalir.Location = new Point(897, 526);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 23);
-            btnSalir.TabIndex = 14;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            btnSalir.Click += btnSalir_Click;
+            dgvConsulta.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvConsulta.Location = new Point(257, 31);
+            dgvConsulta.Name = "dgvConsulta";
+            dgvConsulta.Size = new Size(662, 345);
+            dgvConsulta.TabIndex = 8;
             // 
             // FormConsultaAsignaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 561);
-            Controls.Add(btnSalir);
-            Controls.Add(dataGridView1);
-            Controls.Add(button1);
-            Controls.Add(label1);
-            Controls.Add(comboBox2);
+            ClientSize = new Size(931, 559);
+            Controls.Add(dgvConsulta);
+            Controls.Add(btnBuscar);
+            Controls.Add(lblFiltros);
+            Controls.Add(cmbFiltro);
             Controls.Add(comboBox1);
             Name = "FormConsultaAsignaciones";
             Text = "FormConsultaAsignaciones";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvConsulta).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -110,10 +98,9 @@
         #endregion
 
         private ComboBox comboBox1;
-        private Label label1;
-        private ComboBox comboBox2;
-        private Button button1;
-        private DataGridView dataGridView1;
-        private Button btnSalir;
+        private Label lblFiltros;
+        private ComboBox cmbFiltro;
+        private Button btnBuscar;
+        private DataGridView dgvConsulta;
     }
 }

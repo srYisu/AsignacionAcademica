@@ -23,5 +23,10 @@ namespace AsignacionAcademica
             formMenuPrincipal.Show();
             this.Hide();
         }
+
+        private void FormAulas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

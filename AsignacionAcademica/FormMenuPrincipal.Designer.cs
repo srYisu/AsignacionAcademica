@@ -35,11 +35,12 @@
             btnAsignarClases = new Button();
             btnConsultarAsignaciones = new Button();
             btnCerrar = new Button();
+            pnlBase = new Panel();
             SuspendLayout();
             // 
             // btnProfesores
             // 
-            btnProfesores.Location = new Point(312, 149);
+            btnProfesores.Location = new Point(12, 110);
             btnProfesores.Name = "btnProfesores";
             btnProfesores.Size = new Size(151, 57);
             btnProfesores.TabIndex = 0;
@@ -49,7 +50,7 @@
             // 
             // btnAulas
             // 
-            btnAulas.Location = new Point(521, 149);
+            btnAulas.Location = new Point(12, 183);
             btnAulas.Name = "btnAulas";
             btnAulas.Size = new Size(151, 57);
             btnAulas.TabIndex = 1;
@@ -59,7 +60,7 @@
             // 
             // btnAsignaturas
             // 
-            btnAsignaturas.Location = new Point(312, 238);
+            btnAsignaturas.Location = new Point(12, 255);
             btnAsignaturas.Name = "btnAsignaturas";
             btnAsignaturas.Size = new Size(151, 57);
             btnAsignaturas.TabIndex = 2;
@@ -69,7 +70,7 @@
             // 
             // btnGrupos
             // 
-            btnGrupos.Location = new Point(521, 238);
+            btnGrupos.Location = new Point(12, 330);
             btnGrupos.Name = "btnGrupos";
             btnGrupos.Size = new Size(151, 57);
             btnGrupos.TabIndex = 3;
@@ -79,7 +80,7 @@
             // 
             // btnAsignarClases
             // 
-            btnAsignarClases.Location = new Point(312, 330);
+            btnAsignarClases.Location = new Point(12, 402);
             btnAsignarClases.Name = "btnAsignarClases";
             btnAsignarClases.Size = new Size(151, 57);
             btnAsignarClases.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             // btnConsultarAsignaciones
             // 
-            btnConsultarAsignaciones.Location = new Point(521, 330);
+            btnConsultarAsignaciones.Location = new Point(12, 472);
             btnConsultarAsignaciones.Name = "btnConsultarAsignaciones";
             btnConsultarAsignaciones.Size = new Size(151, 57);
             btnConsultarAsignaciones.TabIndex = 5;
@@ -99,7 +100,7 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(458, 489);
+            btnCerrar.Location = new Point(49, 535);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(75, 23);
             btnCerrar.TabIndex = 6;
@@ -107,11 +108,19 @@
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
             // 
+            // pnlBase
+            // 
+            pnlBase.Location = new Point(191, 0);
+            pnlBase.Name = "pnlBase";
+            pnlBase.Size = new Size(947, 598);
+            pnlBase.TabIndex = 7;
+            // 
             // FormMenuPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 561);
+            ClientSize = new Size(1139, 597);
+            Controls.Add(pnlBase);
             Controls.Add(btnCerrar);
             Controls.Add(btnConsultarAsignaciones);
             Controls.Add(btnAsignarClases);
@@ -133,5 +142,6 @@
         private Button btnAsignarClases;
         private Button btnConsultarAsignaciones;
         private Button btnCerrar;
+        private Panel pnlBase;
     }
 }
