@@ -12,6 +12,7 @@ namespace AsignacionAcademica
 {
     public partial class FormProfesores : Form
     {
+        Conexion c = new Conexion();
         public FormProfesores()
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace AsignacionAcademica
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            c.conect();
         }
     }
 }
