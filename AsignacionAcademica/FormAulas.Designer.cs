@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             btnGuardar = new Button();
-            btnActualizar = new Button();
+            btnEditar = new Button();
             btnEliminar = new Button();
             btnLimpiar = new Button();
             dgvAulas = new DataGridView();
             lblUbicacion = new Label();
             lblCapacidad = new Label();
             lblNombreAula = new Label();
-            txtUbicación = new TextBox();
+            txtUbicacion = new TextBox();
             txtCapacidad = new TextBox();
             txtNombreAula = new TextBox();
-            lblDisponibilidad = new Label();
-            cboxDisponible = new CheckBox();
+            pnlBotonActualizar = new Panel();
+            btnActualizar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAulas).BeginInit();
+            pnlBotonActualizar.SuspendLayout();
             SuspendLayout();
             // 
             // btnGuardar
@@ -52,15 +53,17 @@
             btnGuardar.TabIndex = 6;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
-            // btnActualizar
+            // btnEditar
             // 
-            btnActualizar.Location = new Point(220, 95);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(75, 23);
-            btnActualizar.TabIndex = 7;
-            btnActualizar.Text = "Actualizar";
-            btnActualizar.UseVisualStyleBackColor = true;
+            btnEditar.Location = new Point(220, 95);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 23);
+            btnEditar.TabIndex = 7;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnEliminar
             // 
@@ -70,6 +73,7 @@
             btnEliminar.TabIndex = 8;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnLimpiar
             // 
@@ -79,6 +83,7 @@
             btnLimpiar.TabIndex = 9;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // dgvAulas
             // 
@@ -115,12 +120,12 @@
             lblNombreAula.TabIndex = 22;
             lblNombreAula.Text = "Nombre del aula";
             // 
-            // txtUbicación
+            // txtUbicacion
             // 
-            txtUbicación.Location = new Point(22, 199);
-            txtUbicación.Name = "txtUbicación";
-            txtUbicación.Size = new Size(159, 23);
-            txtUbicación.TabIndex = 21;
+            txtUbicacion.Location = new Point(22, 199);
+            txtUbicacion.Name = "txtUbicacion";
+            txtUbicacion.Size = new Size(159, 23);
+            txtUbicacion.TabIndex = 21;
             // 
             // txtCapacidad
             // 
@@ -136,64 +141,63 @@
             txtNombreAula.Size = new Size(159, 23);
             txtNombreAula.TabIndex = 19;
             // 
-            // lblDisponibilidad
+            // pnlBotonActualizar
             // 
-            lblDisponibilidad.AutoSize = true;
-            lblDisponibilidad.Location = new Point(25, 241);
-            lblDisponibilidad.Name = "lblDisponibilidad";
-            lblDisponibilidad.Size = new Size(83, 15);
-            lblDisponibilidad.TabIndex = 29;
-            lblDisponibilidad.Text = "Disponibilidad";
+            pnlBotonActualizar.Controls.Add(btnActualizar);
+            pnlBotonActualizar.Location = new Point(216, 63);
+            pnlBotonActualizar.Name = "pnlBotonActualizar";
+            pnlBotonActualizar.Size = new Size(79, 30);
+            pnlBotonActualizar.TabIndex = 25;
             // 
-            // cboxDisponible
+            // btnActualizar
             // 
-            cboxDisponible.AutoSize = true;
-            cboxDisponible.Location = new Point(22, 264);
-            cboxDisponible.Name = "cboxDisponible";
-            cboxDisponible.Size = new Size(82, 19);
-            cboxDisponible.TabIndex = 28;
-            cboxDisponible.Text = "Disponible";
-            cboxDisponible.UseVisualStyleBackColor = true;
+            btnActualizar.Location = new Point(3, 2);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 20;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // FormAulas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 559);
-            Controls.Add(lblDisponibilidad);
-            Controls.Add(cboxDisponible);
+            Controls.Add(pnlBotonActualizar);
             Controls.Add(lblUbicacion);
             Controls.Add(lblCapacidad);
             Controls.Add(lblNombreAula);
-            Controls.Add(txtUbicación);
+            Controls.Add(txtUbicacion);
             Controls.Add(txtCapacidad);
             Controls.Add(txtNombreAula);
             Controls.Add(dgvAulas);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
-            Controls.Add(btnActualizar);
+            Controls.Add(btnEditar);
             Controls.Add(btnGuardar);
             Name = "FormAulas";
             Text = "FormAulas";
             Load += FormAulas_Load;
             ((System.ComponentModel.ISupportInitialize)dgvAulas).EndInit();
+            pnlBotonActualizar.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Button btnGuardar;
-        private Button btnActualizar;
+        private Button btnEditar;
         private Button btnEliminar;
         private Button btnLimpiar;
         private DataGridView dgvAulas;
         private Label lblUbicacion;
         private Label lblCapacidad;
         private Label lblNombreAula;
-        private TextBox txtUbicación;
+        private TextBox txtUbicacion;
         private TextBox txtCapacidad;
         private TextBox txtNombreAula;
-        private Label lblDisponibilidad;
-        private CheckBox cboxDisponible;
+        private Panel pnlBotonActualizar;
+        private Button btnActualizar;
     }
 }

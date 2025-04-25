@@ -91,7 +91,7 @@ namespace AsignacionAcademica
 
         public bool EditarProfesor(GestionProfesores profesor, int id)
         {
-            string query = $"UPDATE profesores SET nombre=@nombre, apellido_P=@apellidoP, apellido_M=@apellidoM, especialidad=@especialidad, WHERE idProfesores={id}";
+            string query = $"UPDATE profesores SET nombre=@nombre, apellido_P=@apellidoP, apellido_M=@apellidoM, especialidad=@especialidad WHERE idProfesores={id}";
 
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {

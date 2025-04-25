@@ -54,29 +54,9 @@ namespace AsignacionAcademica
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este profesor?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                if (dgvProfesores.SelectedRows.Count > 0)
-                {
-                    int id = Convert.ToInt32(dgvProfesores.SelectedRows[0].Cells[0].Value);
-                    if (consultaProfesores.EliminarProfesor(id))
-                    {
-                        MessageBox.Show("Profesor eliminado correctamente");
-                        CargarProfesores();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al eliminar el profesor");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione un profesor para eliminar");
-                }
-            }
+            EliminarProfesor();
         }
-        public void configTabla()
+        private void configTabla()
         {
             // Configuración de la tabla
             dgvProfesores.AllowUserToAddRows = false;
@@ -104,7 +84,7 @@ namespace AsignacionAcademica
                     profesores[i].nombre,
                     profesores[i].apellidoPaterno,
                     profesores[i].apellidoMaterno,
-                    profesores[i].especialidad,
+                    profesores[i].especialidad);
             }
         }
         private void GuardarProfesor()
@@ -140,7 +120,30 @@ namespace AsignacionAcademica
             txtApellidoPaterno.Clear();
             txtApellidoMaterno.Clear();
             txtEspecialidad.Clear();
-            cboxDisponible.Checked = false;
+        }
+        private void EliminarProfesor()
+        {
+            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este profesor?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                if (dgvProfesores.SelectedRows.Count > 0)
+                {
+                    int id = Convert.ToInt32(dgvProfesores.SelectedRows[0].Cells[0].Value);
+                    if (consultaProfesores.EliminarProfesor(id))
+                    {
+                        MessageBox.Show("Profesor eliminado correctamente");
+                        CargarProfesores();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar el profesor");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un profesor para eliminar");
+                }
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -156,12 +159,14 @@ namespace AsignacionAcademica
         {
             pnlBotonActualizar.Visible = true;
             EditarProfesor();
+            btnLimpiar.Text = "Cancelar";
         }
 
         private void btnLimpiar_Click_1(object sender, EventArgs e)
         {
             LimpiarCampos();
             pnlBotonActualizar.Visible = false;
+            btnLimpiar.Text = "Limpiar";
         }
 
         private void btnActualizar_Click_1(object sender, EventArgs e)
