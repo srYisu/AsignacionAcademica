@@ -28,28 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblCurso = new Label();
+            lblCarrera = new Label();
             lblNumAlumnos = new Label();
             lblGrupo = new Label();
-            txtCurso = new TextBox();
             txtNumAlumnos = new TextBox();
             txtGrupo = new TextBox();
             dgvGrupos = new DataGridView();
             btnLimpiar = new Button();
             btnEliminar = new Button();
-            btnActualizar = new Button();
+            btnEditar = new Button();
             btnGuardar = new Button();
+            pnlBotonActualizar = new Panel();
+            btnActualizar = new Button();
+            cmbCarrera = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvGrupos).BeginInit();
+            pnlBotonActualizar.SuspendLayout();
             SuspendLayout();
             // 
-            // lblCurso
+            // lblCarrera
             // 
-            lblCurso.AutoSize = true;
-            lblCurso.Location = new Point(30, 182);
-            lblCurso.Name = "lblCurso";
-            lblCurso.Size = new Size(38, 15);
-            lblCurso.TabIndex = 37;
-            lblCurso.Text = "Curso";
+            lblCarrera.AutoSize = true;
+            lblCarrera.Location = new Point(30, 182);
+            lblCarrera.Name = "lblCarrera";
+            lblCarrera.Size = new Size(45, 15);
+            lblCarrera.TabIndex = 37;
+            lblCarrera.Text = "Carrera";
             // 
             // lblNumAlumnos
             // 
@@ -69,13 +72,6 @@
             lblGrupo.TabIndex = 35;
             lblGrupo.Text = "Grupo";
             lblGrupo.Click += label1_Click;
-            // 
-            // txtCurso
-            // 
-            txtCurso.Location = new Point(30, 200);
-            txtCurso.Name = "txtCurso";
-            txtCurso.Size = new Size(159, 23);
-            txtCurso.TabIndex = 34;
             // 
             // txtNumAlumnos
             // 
@@ -107,6 +103,7 @@
             btnLimpiar.TabIndex = 44;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnEliminar
             // 
@@ -116,15 +113,17 @@
             btnEliminar.TabIndex = 43;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
-            // btnActualizar
+            // btnEditar
             // 
-            btnActualizar.Location = new Point(231, 96);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(75, 23);
-            btnActualizar.TabIndex = 42;
-            btnActualizar.Text = "Actualizar";
-            btnActualizar.UseVisualStyleBackColor = true;
+            btnEditar.Location = new Point(231, 96);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 23);
+            btnEditar.TabIndex = 42;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnGuardar
             // 
@@ -134,20 +133,49 @@
             btnGuardar.TabIndex = 41;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // pnlBotonActualizar
+            // 
+            pnlBotonActualizar.Controls.Add(btnActualizar);
+            pnlBotonActualizar.Location = new Point(228, 67);
+            pnlBotonActualizar.Name = "pnlBotonActualizar";
+            pnlBotonActualizar.Size = new Size(78, 27);
+            pnlBotonActualizar.TabIndex = 45;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.Location = new Point(3, 2);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 20;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
+            // 
+            // cmbCarrera
+            // 
+            cmbCarrera.FormattingEnabled = true;
+            cmbCarrera.Items.AddRange(new object[] { "Ing. Civil", "Ing. Sistemas computacionales", "Ing. Industrial", "Administración de empresas" });
+            cmbCarrera.Location = new Point(30, 200);
+            cmbCarrera.Name = "cmbCarrera";
+            cmbCarrera.Size = new Size(159, 23);
+            cmbCarrera.TabIndex = 46;
             // 
             // FormGrupos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 559);
+            Controls.Add(cmbCarrera);
+            Controls.Add(pnlBotonActualizar);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
-            Controls.Add(btnActualizar);
+            Controls.Add(btnEditar);
             Controls.Add(btnGuardar);
-            Controls.Add(lblCurso);
+            Controls.Add(lblCarrera);
             Controls.Add(lblNumAlumnos);
             Controls.Add(lblGrupo);
-            Controls.Add(txtCurso);
             Controls.Add(txtNumAlumnos);
             Controls.Add(txtGrupo);
             Controls.Add(dgvGrupos);
@@ -155,6 +183,7 @@
             Text = "FormGrupos";
             Load += FormGrupos_Load;
             ((System.ComponentModel.ISupportInitialize)dgvGrupos).EndInit();
+            pnlBotonActualizar.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -163,16 +192,18 @@
 
         private Label label4;
         private TextBox textBox4;
-        private Label lblCurso;
+        private Label lblCarrera;
         private Label lblNumAlumnos;
         private Label lblGrupo;
-        private TextBox txtCurso;
         private TextBox txtNumAlumnos;
         private TextBox txtGrupo;
         private DataGridView dgvGrupos;
         private Button btnLimpiar;
         private Button btnEliminar;
-        private Button btnActualizar;
+        private Button btnEditar;
         private Button btnGuardar;
+        private Panel pnlBotonActualizar;
+        private Button btnActualizar;
+        private ComboBox cmbCarrera;
     }
 }
