@@ -28,59 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            comboBox4 = new ComboBox();
+            cmbGrupo = new ComboBox();
+            cmbProfesor = new ComboBox();
+            cmbAula = new ComboBox();
+            cmbAsignatura = new ComboBox();
             lblGrupo = new Label();
             lblProfesor = new Label();
             lblAula = new Label();
             lblAsignatura = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
-            comboBox5 = new ComboBox();
+            dtpHoraInicio = new DateTimePicker();
+            dtpHoraFin = new DateTimePicker();
             dgvClases = new DataGridView();
             btnLimpiar = new Button();
             btnEliminar = new Button();
-            btnActualizar = new Button();
+            btnEditar = new Button();
             btnGuardar = new Button();
             lblHoraInicio = new Label();
             lblHoraFin = new Label();
             lblDias = new Label();
+            pnlBotonActualizar = new Panel();
+            btnActualizar = new Button();
+            cmDia = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvClases).BeginInit();
+            pnlBotonActualizar.SuspendLayout();
             SuspendLayout();
             // 
-            // comboBox1
+            // cmbGrupo
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(27, 61);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(170, 23);
-            comboBox1.TabIndex = 0;
+            cmbGrupo.FormattingEnabled = true;
+            cmbGrupo.Location = new Point(27, 61);
+            cmbGrupo.Name = "cmbGrupo";
+            cmbGrupo.Size = new Size(170, 23);
+            cmbGrupo.TabIndex = 0;
             // 
-            // comboBox2
+            // cmbProfesor
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(27, 125);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(170, 23);
-            comboBox2.TabIndex = 1;
+            cmbProfesor.FormattingEnabled = true;
+            cmbProfesor.Location = new Point(27, 125);
+            cmbProfesor.Name = "cmbProfesor";
+            cmbProfesor.Size = new Size(170, 23);
+            cmbProfesor.TabIndex = 1;
             // 
-            // comboBox3
+            // cmbAula
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(27, 190);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(170, 23);
-            comboBox3.TabIndex = 2;
+            cmbAula.FormattingEnabled = true;
+            cmbAula.Location = new Point(27, 190);
+            cmbAula.Name = "cmbAula";
+            cmbAula.Size = new Size(170, 23);
+            cmbAula.TabIndex = 2;
             // 
-            // comboBox4
+            // cmbAsignatura
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(27, 257);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(170, 23);
-            comboBox4.TabIndex = 3;
+            cmbAsignatura.FormattingEnabled = true;
+            cmbAsignatura.Location = new Point(27, 257);
+            cmbAsignatura.Name = "cmbAsignatura";
+            cmbAsignatura.Size = new Size(170, 23);
+            cmbAsignatura.TabIndex = 3;
             // 
             // lblGrupo
             // 
@@ -118,27 +121,19 @@
             lblAsignatura.TabIndex = 7;
             lblAsignatura.Text = "Asignatura";
             // 
-            // dateTimePicker1
+            // dtpHoraInicio
             // 
-            dateTimePicker1.Location = new Point(27, 321);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(216, 23);
-            dateTimePicker1.TabIndex = 8;
+            dtpHoraInicio.Location = new Point(27, 321);
+            dtpHoraInicio.Name = "dtpHoraInicio";
+            dtpHoraInicio.Size = new Size(216, 23);
+            dtpHoraInicio.TabIndex = 8;
             // 
-            // dateTimePicker2
+            // dtpHoraFin
             // 
-            dateTimePicker2.Location = new Point(27, 388);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(216, 23);
-            dateTimePicker2.TabIndex = 9;
-            // 
-            // comboBox5
-            // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(27, 453);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(170, 23);
-            comboBox5.TabIndex = 10;
+            dtpHoraFin.Location = new Point(27, 388);
+            dtpHoraFin.Name = "dtpHoraFin";
+            dtpHoraFin.Size = new Size(216, 23);
+            dtpHoraFin.TabIndex = 9;
             // 
             // dgvClases
             // 
@@ -156,6 +151,7 @@
             btnLimpiar.TabIndex = 21;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnEliminar
             // 
@@ -165,15 +161,17 @@
             btnEliminar.TabIndex = 20;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
-            // btnActualizar
+            // btnEditar
             // 
-            btnActualizar.Location = new Point(230, 89);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(75, 23);
-            btnActualizar.TabIndex = 19;
-            btnActualizar.Text = "Actualizar";
-            btnActualizar.UseVisualStyleBackColor = true;
+            btnEditar.Location = new Point(230, 89);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 23);
+            btnEditar.TabIndex = 19;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnGuardar
             // 
@@ -183,6 +181,7 @@
             btnGuardar.TabIndex = 18;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // lblHoraInicio
             // 
@@ -211,57 +210,87 @@
             lblDias.TabIndex = 24;
             lblDias.Text = "Dia";
             // 
+            // pnlBotonActualizar
+            // 
+            pnlBotonActualizar.Controls.Add(btnActualizar);
+            pnlBotonActualizar.Location = new Point(227, 58);
+            pnlBotonActualizar.Name = "pnlBotonActualizar";
+            pnlBotonActualizar.Size = new Size(78, 27);
+            pnlBotonActualizar.TabIndex = 46;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.Location = new Point(3, 2);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 20;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
+            // 
+            // cmDia
+            // 
+            cmDia.FormattingEnabled = true;
+            cmDia.Location = new Point(27, 453);
+            cmDia.Name = "cmDia";
+            cmDia.Size = new Size(170, 23);
+            cmDia.TabIndex = 52;
+            // 
             // FormAsignaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 559);
+            Controls.Add(cmDia);
+            Controls.Add(pnlBotonActualizar);
             Controls.Add(lblDias);
             Controls.Add(lblHoraFin);
             Controls.Add(lblHoraInicio);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
-            Controls.Add(btnActualizar);
+            Controls.Add(btnEditar);
             Controls.Add(btnGuardar);
             Controls.Add(dgvClases);
-            Controls.Add(comboBox5);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpHoraFin);
+            Controls.Add(dtpHoraInicio);
             Controls.Add(lblAsignatura);
             Controls.Add(lblAula);
             Controls.Add(lblProfesor);
             Controls.Add(lblGrupo);
-            Controls.Add(comboBox4);
-            Controls.Add(comboBox3);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(cmbAsignatura);
+            Controls.Add(cmbAula);
+            Controls.Add(cmbProfesor);
+            Controls.Add(cmbGrupo);
             Name = "FormAsignaciones";
             Text = "FormAsignaciones";
             ((System.ComponentModel.ISupportInitialize)dgvClases).EndInit();
+            pnlBotonActualizar.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
+        private ComboBox cmbGrupo;
+        private ComboBox cmbProfesor;
+        private ComboBox cmbAula;
+        private ComboBox cmbAsignatura;
         private Label lblGrupo;
         private Label lblProfesor;
         private Label lblAula;
         private Label lblAsignatura;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
-        private ComboBox comboBox5;
+        private DateTimePicker dtpHoraInicio;
+        private DateTimePicker dtpHoraFin;
         private DataGridView dgvClases;
         private Button btnLimpiar;
         private Button btnEliminar;
-        private Button btnActualizar;
+        private Button btnEditar;
         private Button btnGuardar;
         private Label lblHoraInicio;
         private Label lblHoraFin;
         private Label lblDias;
+        private Panel pnlBotonActualizar;
+        private Button btnActualizar;
+        private ComboBox cmDia;
     }
 }
