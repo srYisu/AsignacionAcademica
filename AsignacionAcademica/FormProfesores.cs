@@ -86,7 +86,6 @@ namespace AsignacionAcademica
             dgvProfesores.Columns.Add("apellidoP", "Apellido paterno");
             dgvProfesores.Columns.Add("apellidoM", "Apelliod materno");
             dgvProfesores.Columns.Add("especialidad", "Especialidad");
-            dgvProfesores.Columns.Add("disponible", "Disponible");
 
             // Establecer el modo de selección de filas
             dgvProfesores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -106,17 +105,10 @@ namespace AsignacionAcademica
                     profesores[i].apellidoPaterno,
                     profesores[i].apellidoMaterno,
                     profesores[i].especialidad,
-                    profesores[i].disponibilidad);
             }
         }
         private void GuardarProfesor()
         {
-            if (cboxDisponible.Checked)
-            {
-                gestionProfesores.disponibilidad = true;
-            }
-            else { gestionProfesores.disponibilidad = false; }
-
             gestionProfesores.nombre = txtNombre.Text;
             gestionProfesores.apellidoPaterno = txtApellidoPaterno.Text;
             gestionProfesores.apellidoMaterno = txtApellidoMaterno.Text;
@@ -140,7 +132,6 @@ namespace AsignacionAcademica
                 txtApellidoPaterno.Text = dgvProfesores.SelectedRows[0].Cells[2].Value.ToString();
                 txtApellidoMaterno.Text = dgvProfesores.SelectedRows[0].Cells[3].Value.ToString();
                 txtEspecialidad.Text = dgvProfesores.SelectedRows[0].Cells[4].Value.ToString();
-                cboxDisponible.Checked = Convert.ToBoolean(dgvProfesores.SelectedRows[0].Cells[5].Value);
             }
         }
         private void LimpiarCampos()
@@ -175,12 +166,6 @@ namespace AsignacionAcademica
 
         private void btnActualizar_Click_1(object sender, EventArgs e)
         {
-            if (cboxDisponible.Checked)
-            {
-                gestionProfesores.disponibilidad = true;
-            }
-            else { gestionProfesores.disponibilidad = false; }
-
             gestionProfesores.nombre = txtNombre.Text;
             gestionProfesores.apellidoPaterno = txtApellidoPaterno.Text;
             gestionProfesores.apellidoMaterno = txtApellidoMaterno.Text;

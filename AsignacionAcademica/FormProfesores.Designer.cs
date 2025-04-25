@@ -32,7 +32,6 @@
             txtNombre = new TextBox();
             lblEspecialidad = new Label();
             txtEspecialidad = new TextBox();
-            cboxDisponible = new CheckBox();
             btnGuardar = new Button();
             btnEditar = new Button();
             btnEliminar = new Button();
@@ -42,7 +41,6 @@
             lblApellidoMaterno = new Label();
             txtApellidoPaterno = new TextBox();
             lblApellidoPaterno = new Label();
-            lblDisponibilidad = new Label();
             pnlBotonActualizar = new Panel();
             btnActualizar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProfesores).BeginInit();
@@ -81,16 +79,6 @@
             txtEspecialidad.Name = "txtEspecialidad";
             txtEspecialidad.Size = new Size(159, 23);
             txtEspecialidad.TabIndex = 3;
-            // 
-            // cboxDisponible
-            // 
-            cboxDisponible.AutoSize = true;
-            cboxDisponible.Location = new Point(32, 313);
-            cboxDisponible.Name = "cboxDisponible";
-            cboxDisponible.Size = new Size(82, 19);
-            cboxDisponible.TabIndex = 7;
-            cboxDisponible.Text = "Disponible";
-            cboxDisponible.UseVisualStyleBackColor = true;
             // 
             // btnGuardar
             // 
@@ -172,16 +160,6 @@
             lblApellidoPaterno.TabIndex = 14;
             lblApellidoPaterno.Text = "Apellido paterno";
             // 
-            // lblDisponibilidad
-            // 
-            lblDisponibilidad.AutoSize = true;
-            lblDisponibilidad.Location = new Point(35, 290);
-            lblDisponibilidad.Name = "lblDisponibilidad";
-            lblDisponibilidad.Size = new Size(83, 15);
-            lblDisponibilidad.TabIndex = 18;
-            lblDisponibilidad.Text = "Disponibilidad";
-            lblDisponibilidad.Click += label1_Click;
-            // 
             // pnlBotonActualizar
             // 
             pnlBotonActualizar.Controls.Add(btnActualizar);
@@ -206,7 +184,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 559);
             Controls.Add(pnlBotonActualizar);
-            Controls.Add(lblDisponibilidad);
             Controls.Add(txtApellidoMaterno);
             Controls.Add(lblApellidoMaterno);
             Controls.Add(txtApellidoPaterno);
@@ -216,7 +193,6 @@
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
             Controls.Add(btnGuardar);
-            Controls.Add(cboxDisponible);
             Controls.Add(txtEspecialidad);
             Controls.Add(lblEspecialidad);
             Controls.Add(txtNombre);
@@ -240,7 +216,6 @@
         private TextBox textBox3;
         private Label label4;
         private CheckedListBox checkedListBox1;
-        private CheckBox cboxDisponible;
         private Button btnGuardar;
         private Button btnEditar;
         private Button btnEliminar;
@@ -250,7 +225,6 @@
         private Label lblApellidoMaterno;
         private TextBox txtApellidoPaterno;
         private Label lblApellidoPaterno;
-        private Label lblDisponibilidad;
         private Panel pnlBotonActualizar;
         private Button btnActualizar;
     }

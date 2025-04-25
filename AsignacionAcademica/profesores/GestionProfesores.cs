@@ -13,6 +13,5 @@ namespace AsignacionAcademica.profesores
         public string apellidoPaterno { get; set; }
         public string apellidoMaterno { get; set; }
         public string especialidad { get; set; }
-        public bool disponibilidad { get; set; }
     }
 }

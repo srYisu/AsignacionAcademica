@@ -45,7 +45,6 @@ namespace AsignacionAcademica
                                 apellidoPaterno = reader.GetString("apellido_P"),
                                 apellidoMaterno = reader.GetString("apellido_M"),
                                 especialidad = reader.GetString("especialidad"),
-                                disponibilidad = reader.GetBoolean("disponibilidad")
                             });
                         }
                     }
@@ -65,7 +64,7 @@ namespace AsignacionAcademica
 
         public bool AgregarProfesor(GestionProfesores profesor)
         {
-            string query = "INSERT INTO profesores (nombre, apellido_P, apellido_M, especialidad, disponibilidad) VALUES (@nombre, @apellidoP, @apellidoM, @especialidad, @disponibilidad)";
+            string query = "INSERT INTO profesores (nombre, apellido_P, apellido_M, especialidad) VALUES (@nombre, @apellidoP, @apellidoM, @especialidad)";
 
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
@@ -78,7 +77,6 @@ namespace AsignacionAcademica
                         cmd.Parameters.AddWithValue("@apellidoP", profesor.apellidoPaterno);
                         cmd.Parameters.AddWithValue("@apellidoM", profesor.apellidoMaterno);
                         cmd.Parameters.AddWithValue("@especialidad", profesor.especialidad);
-                        cmd.Parameters.AddWithValue("@disponibilidad", profesor.disponibilidad);
 
                         return cmd.ExecuteNonQuery() > 0;
                     }
@@ -93,7 +91,7 @@ namespace AsignacionAcademica
 
         public bool EditarProfesor(GestionProfesores profesor, int id)
         {
-            string query = $"UPDATE profesores SET nombre=@nombre, apellido_P=@apellidoP, apellido_M=@apellidoM, especialidad=@especialidad, disponibilidad=@disponibilidad WHERE idProfesores={id}";
+            string query = $"UPDATE profesores SET nombre=@nombre, apellido_P=@apellidoP, apellido_M=@apellidoM, especialidad=@especialidad, WHERE idProfesores={id}";
 
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
@@ -107,7 +105,6 @@ namespace AsignacionAcademica
                         cmd.Parameters.AddWithValue("@apellidoP", profesor.apellidoPaterno);
                         cmd.Parameters.AddWithValue("@apellidoM", profesor.apellidoMaterno);
                         cmd.Parameters.AddWithValue("@especialidad", profesor.especialidad);
-                        cmd.Parameters.AddWithValue("@disponibilidad", profesor.disponibilidad);
 
                         return cmd.ExecuteNonQuery() > 0;
                     }
