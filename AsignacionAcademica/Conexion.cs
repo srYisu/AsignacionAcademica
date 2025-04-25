@@ -9,11 +9,9 @@ namespace AsignacionAcademica
 {
     internal class Conexion
     {
-        public void conect()
+        private const string connectionString = $"server=localhost;user=root;password=;database=asignacionescolar";
+        public void PruebaConexion()
         {
-            string password = "";
-            string connectionString = $"server=localhost;user=root;password={password};database=asignacionescolar";
-
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 try
@@ -26,6 +24,10 @@ namespace AsignacionAcademica
                     MessageBox.Show("Error al conectar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+        public MySqlConnection ObtenerConexion()
+        {
+            return new MySqlConnection(connectionString);
         }
     }
 }

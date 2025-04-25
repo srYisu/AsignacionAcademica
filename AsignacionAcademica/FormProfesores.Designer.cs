@@ -34,7 +34,7 @@
             txtEspecialidad = new TextBox();
             cboxDisponible = new CheckBox();
             btnGuardar = new Button();
-            btnActualizar = new Button();
+            btnEditar = new Button();
             btnEliminar = new Button();
             btnLimpiar = new Button();
             dgvProfesores = new DataGridView();
@@ -43,7 +43,10 @@
             txtApellidoPaterno = new TextBox();
             lblApellidoPaterno = new Label();
             lblDisponibilidad = new Label();
+            pnlBotonActualizar = new Panel();
+            btnActualizar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProfesores).BeginInit();
+            pnlBotonActualizar.SuspendLayout();
             SuspendLayout();
             // 
             // lblNombre
@@ -97,15 +100,17 @@
             btnGuardar.TabIndex = 8;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
-            // btnActualizar
+            // btnEditar
             // 
-            btnActualizar.Location = new Point(250, 78);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(75, 23);
-            btnActualizar.TabIndex = 9;
-            btnActualizar.Text = "Actualizar";
-            btnActualizar.UseVisualStyleBackColor = true;
+            btnEditar.Location = new Point(250, 78);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 23);
+            btnEditar.TabIndex = 9;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnActualizar_Click;
             // 
             // btnEliminar
             // 
@@ -125,6 +130,7 @@
             btnLimpiar.TabIndex = 11;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click_1;
             // 
             // dgvProfesores
             // 
@@ -176,11 +182,30 @@
             lblDisponibilidad.Text = "Disponibilidad";
             lblDisponibilidad.Click += label1_Click;
             // 
+            // pnlBotonActualizar
+            // 
+            pnlBotonActualizar.Controls.Add(btnActualizar);
+            pnlBotonActualizar.Location = new Point(246, 46);
+            pnlBotonActualizar.Name = "pnlBotonActualizar";
+            pnlBotonActualizar.Size = new Size(79, 30);
+            pnlBotonActualizar.TabIndex = 19;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.Location = new Point(3, 3);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 20;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click_1;
+            // 
             // FormProfesores
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 559);
+            Controls.Add(pnlBotonActualizar);
             Controls.Add(lblDisponibilidad);
             Controls.Add(txtApellidoMaterno);
             Controls.Add(lblApellidoMaterno);
@@ -189,7 +214,7 @@
             Controls.Add(dgvProfesores);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
-            Controls.Add(btnActualizar);
+            Controls.Add(btnEditar);
             Controls.Add(btnGuardar);
             Controls.Add(cboxDisponible);
             Controls.Add(txtEspecialidad);
@@ -200,6 +225,7 @@
             Text = "FormProfesores";
             Load += FormProfesores_Load;
             ((System.ComponentModel.ISupportInitialize)dgvProfesores).EndInit();
+            pnlBotonActualizar.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -216,7 +242,7 @@
         private CheckedListBox checkedListBox1;
         private CheckBox cboxDisponible;
         private Button btnGuardar;
-        private Button btnActualizar;
+        private Button btnEditar;
         private Button btnEliminar;
         private Button btnLimpiar;
         private DataGridView dgvProfesores;
@@ -225,5 +251,7 @@
         private TextBox txtApellidoPaterno;
         private Label lblApellidoPaterno;
         private Label lblDisponibilidad;
+        private Panel pnlBotonActualizar;
+        private Button btnActualizar;
     }
 }
