@@ -28,41 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            comboBox1 = new ComboBox();
+            txtAsignatura = new TextBox();
+            cmbTipo = new ComboBox();
             dgvAsignaturas = new DataGridView();
             lblAsignatura = new Label();
-            txtDuracion = new Label();
-            cmbTipo = new Label();
+            lblTipo = new Label();
             btnLimpiar = new Button();
             btnEliminar = new Button();
-            btnActualizar = new Button();
+            btnEditar = new Button();
             btnGuardar = new Button();
+            pnlBotonActualizar = new Panel();
+            btnActualizar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAsignaturas).BeginInit();
+            pnlBotonActualizar.SuspendLayout();
             SuspendLayout();
             // 
-            // textBox1
+            // txtAsignatura
             // 
-            textBox1.Location = new Point(23, 68);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(159, 23);
-            textBox1.TabIndex = 2;
+            txtAsignatura.Location = new Point(23, 68);
+            txtAsignatura.Name = "txtAsignatura";
+            txtAsignatura.Size = new Size(159, 23);
+            txtAsignatura.TabIndex = 2;
             // 
-            // textBox2
+            // cmbTipo
             // 
-            textBox2.Location = new Point(23, 133);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(159, 23);
-            textBox2.TabIndex = 3;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(23, 195);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(159, 23);
-            comboBox1.TabIndex = 5;
+            cmbTipo.FormattingEnabled = true;
+            cmbTipo.Items.AddRange(new object[] { "Teorica", "Practica", "Mixta" });
+            cmbTipo.Location = new Point(23, 126);
+            cmbTipo.Name = "cmbTipo";
+            cmbTipo.Size = new Size(159, 23);
+            cmbTipo.TabIndex = 5;
             // 
             // dgvAsignaturas
             // 
@@ -81,23 +76,14 @@
             lblAsignatura.TabIndex = 16;
             lblAsignatura.Text = "Asignatura";
             // 
-            // txtDuracion
+            // lblTipo
             // 
-            txtDuracion.AutoSize = true;
-            txtDuracion.Location = new Point(23, 115);
-            txtDuracion.Name = "txtDuracion";
-            txtDuracion.Size = new Size(55, 15);
-            txtDuracion.TabIndex = 17;
-            txtDuracion.Text = "Duracion";
-            // 
-            // cmbTipo
-            // 
-            cmbTipo.AutoSize = true;
-            cmbTipo.Location = new Point(23, 177);
-            cmbTipo.Name = "cmbTipo";
-            cmbTipo.Size = new Size(31, 15);
-            cmbTipo.TabIndex = 19;
-            cmbTipo.Text = "Tipo";
+            lblTipo.AutoSize = true;
+            lblTipo.Location = new Point(23, 108);
+            lblTipo.Name = "lblTipo";
+            lblTipo.Size = new Size(31, 15);
+            lblTipo.TabIndex = 19;
+            lblTipo.Text = "Tipo";
             // 
             // btnLimpiar
             // 
@@ -107,6 +93,7 @@
             btnLimpiar.TabIndex = 23;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnEliminar
             // 
@@ -116,15 +103,17 @@
             btnEliminar.TabIndex = 22;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
-            // btnActualizar
+            // btnEditar
             // 
-            btnActualizar.Location = new Point(232, 97);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(75, 23);
-            btnActualizar.TabIndex = 21;
-            btnActualizar.Text = "Actualizar";
-            btnActualizar.UseVisualStyleBackColor = true;
+            btnEditar.Location = new Point(232, 97);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(75, 23);
+            btnEditar.TabIndex = 21;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnGuardar
             // 
@@ -134,42 +123,61 @@
             btnGuardar.TabIndex = 20;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // pnlBotonActualizar
+            // 
+            pnlBotonActualizar.Controls.Add(btnActualizar);
+            pnlBotonActualizar.Location = new Point(228, 68);
+            pnlBotonActualizar.Name = "pnlBotonActualizar";
+            pnlBotonActualizar.Size = new Size(79, 27);
+            pnlBotonActualizar.TabIndex = 26;
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.Location = new Point(3, 2);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 20;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click_1;
             // 
             // FormAsignaturas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 559);
+            Controls.Add(pnlBotonActualizar);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
-            Controls.Add(btnActualizar);
+            Controls.Add(btnEditar);
             Controls.Add(btnGuardar);
-            Controls.Add(cmbTipo);
-            Controls.Add(txtDuracion);
+            Controls.Add(lblTipo);
             Controls.Add(lblAsignatura);
             Controls.Add(dgvAsignaturas);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(cmbTipo);
+            Controls.Add(txtAsignatura);
             Name = "FormAsignaturas";
             Text = "FormAsignaturas";
             ((System.ComponentModel.ISupportInitialize)dgvAsignaturas).EndInit();
+            pnlBotonActualizar.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private ComboBox comboBox1;
+        private TextBox txtAsignatura;
+        private ComboBox cmbTipo;
         private DataGridView dgvAsignaturas;
         private Label lblAsignatura;
-        private Label txtDuracion;
-        private Label cmbTipo;
+        private Label lblTipo;
         private Button btnLimpiar;
         private Button btnEliminar;
-        private Button btnActualizar;
         private Button btnGuardar;
+        private Panel pnlBotonActualizar;
+        private Button btnActualizar;
+        private Button btnEditar;
     }
 }

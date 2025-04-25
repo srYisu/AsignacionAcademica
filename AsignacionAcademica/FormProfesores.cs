@@ -181,7 +181,9 @@ namespace AsignacionAcademica
                 MessageBox.Show("Profesor actualizado correctamente");
                 CargarProfesores();
                 LimpiarCampos();
+                pnlBotonActualizar.Visible = false;
             }
+            btnLimpiar.Text = "Limpiar";
         }
     }
 

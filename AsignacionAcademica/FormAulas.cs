@@ -89,7 +89,7 @@ namespace AsignacionAcademica
                     int id = Convert.ToInt32(dgvAulas.SelectedRows[0].Cells[0].Value);
                     if (consultaAulas.EliminarAula(id))
                     {
-                        MessageBox.Show("Aula eliminado correctamente");
+                        MessageBox.Show("Aula eliminada correctamente");
                         CargarAulas();
                     }
                     else
@@ -154,6 +154,8 @@ namespace AsignacionAcademica
                 MessageBox.Show("Aula actualizada correctamente");
                 CargarAulas();
                 LimpiarCampos();
+                pnlBotonActualizar.Visible = false;
+                btnLimpiar.Text = "Limpiar";
             }
         }
 
