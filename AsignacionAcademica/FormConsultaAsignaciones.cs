@@ -32,7 +32,7 @@ namespace AsignacionAcademica
             dgvConsulta.AllowUserToAddRows = false;
 
             // Configurar controles
-            rbtnGrupo.Checked = true; // Por defecto buscar por grupo
+            rbtnProfesor.Checked = true; // Por defecto buscar por grupo
             cmbFiltro.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -51,20 +51,22 @@ namespace AsignacionAcademica
                         MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
+                        cmbFiltro.DataSource = dt;
                         cmbFiltro.DisplayMember = "nombre";
                         cmbFiltro.ValueMember = "idGrupos";
-                        cmbFiltro.DataSource = dt;
+                        cmbFiltro.SelectedIndex = -1;
                     }
                     else if (rbtnProfesor.Checked)
                     {
                         // Cargar profesores
-                        string query = "SELECT idProfesores, CONCAT(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno) AS nombreCompleto FROM profesores ORDER BY nombre";
+                        string query = "SELECT idProfesores, CONCAT(nombre, ' ', apellido_P, ' ', apellido_M) AS nombreCompleto FROM profesores ORDER BY nombre";
                         MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
+                        cmbFiltro.DataSource = dt;
                         cmbFiltro.DisplayMember = "nombreCompleto";
                         cmbFiltro.ValueMember = "idProfesores";
-                        cmbFiltro.DataSource = dt;
+                        cmbFiltro.SelectedIndex = -1;
                     }
                     else if (rbtnAula.Checked)
                     {
@@ -73,9 +75,10 @@ namespace AsignacionAcademica
                         MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
+                        cmbFiltro.DataSource = dt;
                         cmbFiltro.DisplayMember = "nombre";
                         cmbFiltro.ValueMember = "idAulas";
-                        cmbFiltro.DataSource = dt;
+                        cmbFiltro.SelectedIndex = -1;
                     }
                 }
             }
@@ -83,21 +86,6 @@ namespace AsignacionAcademica
             {
                 MessageBox.Show("Error al cargar los filtros: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void rbGrupo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbtnGrupo.Checked) CargarFiltros();
-        }
-
-        private void rbProfesor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbtnProfesor.Checked) CargarFiltros();
-        }
-
-        private void rbAula_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbtnAula.Checked) CargarFiltros();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -167,6 +155,21 @@ namespace AsignacionAcademica
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void rbtnGrupo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnGrupo.Checked) CargarFiltros();
+        }
+
+        private void rbtnProfesor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnProfesor.Checked) CargarFiltros();
+        }
+
+        private void rbtnAula_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnAula.Checked) CargarFiltros();
         }
     }
 }

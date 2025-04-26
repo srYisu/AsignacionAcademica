@@ -92,6 +92,7 @@
             rbtnGrupo.TabStop = true;
             rbtnGrupo.Text = "Grupo";
             rbtnGrupo.UseVisualStyleBackColor = true;
+            rbtnGrupo.CheckedChanged += rbtnGrupo_CheckedChanged;
             // 
             // rbtnAula
             // 
@@ -103,6 +104,7 @@
             rbtnAula.TabStop = true;
             rbtnAula.Text = "Aula";
             rbtnAula.UseVisualStyleBackColor = true;
+            rbtnAula.CheckedChanged += rbtnAula_CheckedChanged;
             // 
             // rbtnProfesor
             // 
@@ -114,6 +116,7 @@
             rbtnProfesor.TabStop = true;
             rbtnProfesor.Text = "Profesor";
             rbtnProfesor.UseVisualStyleBackColor = true;
+            rbtnProfesor.CheckedChanged += rbtnProfesor_CheckedChanged;
             // 
             // FormConsultaAsignaciones
             // 
