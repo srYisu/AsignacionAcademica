@@ -17,6 +17,13 @@ namespace AsignacionAcademica
         public FormMenuPrincipal()
         {
             InitializeComponent();
+            btnProfesores.Click += btnProfesores_Click;
+            btnAulas.Click += btnAulas_Click;
+            btnAsignaturas.Click += btnAsignaturas_Click;
+            btnConsultarAsignaciones.Click += btnConsultarAsignaciones_Click;
+            btnGrupos.Click += btnGrupos_Click;
+            btnAsignarClases.Click += btnAsignarClases_Click;
+            btnSalir.Click += btnCerrar_Click;
         }
 
         private void btnProfesores_Click(object sender, EventArgs e)

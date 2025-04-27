@@ -172,5 +172,15 @@ namespace AsignacionAcademica
                 btnLimpiar.Text = "Limpiar";
             }
         }
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvGrupos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

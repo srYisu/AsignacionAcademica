@@ -225,5 +225,10 @@ namespace AsignacionAcademica
         {
             LimpiarCampos();
         }
+
+        private void dgvClases_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

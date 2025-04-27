@@ -165,5 +165,10 @@ namespace AsignacionAcademica
             LimpiarCampos();
             btnLimpiar.Text = "Limpiar";
         }
+
+        private void dgvAulas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
