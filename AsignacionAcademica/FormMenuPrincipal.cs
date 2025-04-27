@@ -24,6 +24,7 @@ namespace AsignacionAcademica
             btnGrupos.Click += btnGrupos_Click;
             btnAsignarClases.Click += btnAsignarClases_Click;
             btnSalir.Click += btnCerrar_Click;
+            btnConsultarAsignaciones.Text = "Consultar \n asignaciones";
         }
 
         private void btnProfesores_Click(object sender, EventArgs e)

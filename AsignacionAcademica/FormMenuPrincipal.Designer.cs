@@ -43,7 +43,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenuPrincipal));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlBase = new Panel();
             btnProfesores = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -80,6 +79,9 @@
             btnProfesores.HoverState.FillColor = Color.FromArgb(63, 111, 255);
             btnProfesores.HoverState.FillColor2 = Color.FromArgb(27, 57, 106);
             btnProfesores.HoverState.ForeColor = Color.White;
+            btnProfesores.Image = Properties.Resources.Profesores;
+            btnProfesores.ImageAlign = HorizontalAlignment.Left;
+            btnProfesores.ImageSize = new Size(35, 35);
             btnProfesores.Location = new Point(0, 110);
             btnProfesores.Name = "btnProfesores";
             btnProfesores.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -116,6 +118,9 @@
             btnAulas.HoverState.FillColor = Color.FromArgb(63, 111, 255);
             btnAulas.HoverState.FillColor2 = Color.FromArgb(27, 57, 106);
             btnAulas.HoverState.ForeColor = Color.White;
+            btnAulas.Image = Properties.Resources.Aula;
+            btnAulas.ImageAlign = HorizontalAlignment.Left;
+            btnAulas.ImageSize = new Size(40, 40);
             btnAulas.Location = new Point(0, 173);
             btnAulas.Name = "btnAulas";
             btnAulas.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -139,6 +144,9 @@
             btnAsignaturas.HoverState.FillColor = Color.FromArgb(63, 111, 255);
             btnAsignaturas.HoverState.FillColor2 = Color.FromArgb(27, 57, 106);
             btnAsignaturas.HoverState.ForeColor = Color.White;
+            btnAsignaturas.Image = Properties.Resources.Asignaturas;
+            btnAsignaturas.ImageAlign = HorizontalAlignment.Left;
+            btnAsignaturas.ImageSize = new Size(40, 40);
             btnAsignaturas.Location = new Point(0, 236);
             btnAsignaturas.Name = "btnAsignaturas";
             btnAsignaturas.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -162,6 +170,9 @@
             btnGrupos.HoverState.FillColor = Color.FromArgb(63, 111, 255);
             btnGrupos.HoverState.FillColor2 = Color.FromArgb(27, 57, 106);
             btnGrupos.HoverState.ForeColor = Color.White;
+            btnGrupos.Image = Properties.Resources.Grupos;
+            btnGrupos.ImageAlign = HorizontalAlignment.Left;
+            btnGrupos.ImageSize = new Size(40, 40);
             btnGrupos.Location = new Point(0, 299);
             btnGrupos.Name = "btnGrupos";
             btnGrupos.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -185,6 +196,9 @@
             btnAsignarClases.HoverState.FillColor = Color.FromArgb(63, 111, 255);
             btnAsignarClases.HoverState.FillColor2 = Color.FromArgb(27, 57, 106);
             btnAsignarClases.HoverState.ForeColor = Color.White;
+            btnAsignarClases.Image = Properties.Resources.AsignarClases;
+            btnAsignarClases.ImageAlign = HorizontalAlignment.Left;
+            btnAsignarClases.ImageSize = new Size(40, 40);
             btnAsignarClases.Location = new Point(0, 362);
             btnAsignarClases.Name = "btnAsignarClases";
             btnAsignarClases.ShadowDecoration.CustomizableEdges = customizableEdges12;
@@ -195,6 +209,7 @@
             // btnConsultarAsignaciones
             // 
             btnConsultarAsignaciones.Animated = true;
+            btnConsultarAsignaciones.BackColor = Color.Transparent;
             btnConsultarAsignaciones.CustomizableEdges = customizableEdges13;
             btnConsultarAsignaciones.DisabledState.BorderColor = Color.DarkGray;
             btnConsultarAsignaciones.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -208,6 +223,9 @@
             btnConsultarAsignaciones.HoverState.FillColor = Color.FromArgb(63, 111, 255);
             btnConsultarAsignaciones.HoverState.FillColor2 = Color.FromArgb(27, 57, 106);
             btnConsultarAsignaciones.HoverState.ForeColor = Color.White;
+            btnConsultarAsignaciones.Image = Properties.Resources.ConsultarAsignaciones;
+            btnConsultarAsignaciones.ImageAlign = HorizontalAlignment.Left;
+            btnConsultarAsignaciones.ImageSize = new Size(40, 40);
             btnConsultarAsignaciones.Location = new Point(0, 425);
             btnConsultarAsignaciones.Name = "btnConsultarAsignaciones";
             btnConsultarAsignaciones.ShadowDecoration.CustomizableEdges = customizableEdges14;
@@ -228,7 +246,7 @@
             btnSalir.Font = new Font("Segoe UI", 9F);
             btnSalir.ForeColor = Color.White;
             btnSalir.HoverState.FillColor = Color.FromArgb(63, 111, 255);
-            btnSalir.Image = (Image)resources.GetObject("btnSalir.Image");
+            btnSalir.Image = Properties.Resources.cerrar_sesion__2_;
             btnSalir.ImageSize = new Size(30, 30);
             btnSalir.Location = new Point(12, 548);
             btnSalir.Name = "btnSalir";
