@@ -314,11 +314,11 @@
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.White;
-            lblTitulo.Location = new Point(327, 9);
+            lblTitulo.Location = new Point(378, 9);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(223, 47);
+            lblTitulo.Size = new Size(116, 47);
             lblTitulo.TabIndex = 54;
-            lblTitulo.Text = "Asignaciones";
+            lblTitulo.Text = "Clases";
             // 
             // FormAsignaciones
             // 
