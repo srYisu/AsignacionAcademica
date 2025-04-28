@@ -64,7 +64,7 @@ namespace AsignacionAcademica
             dgvProfesores.Columns.Add("id", "ID");
             dgvProfesores.Columns.Add("nombre", "Nombre");
             dgvProfesores.Columns.Add("apellidoP", "Apellido paterno");
-            dgvProfesores.Columns.Add("apellidoM", "Apelliod materno");
+            dgvProfesores.Columns.Add("apellidoM", "Apellido materno");
             dgvProfesores.Columns.Add("especialidad", "Especialidad");
 
             // Establecer el modo de selección de filas

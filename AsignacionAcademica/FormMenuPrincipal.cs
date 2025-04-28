@@ -67,5 +67,15 @@ namespace AsignacionAcademica
         {
             Application.Exit();
         }
+
+        private void picLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormMenuPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

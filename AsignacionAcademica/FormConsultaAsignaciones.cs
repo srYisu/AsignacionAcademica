@@ -32,7 +32,7 @@ namespace AsignacionAcademica
             dgvConsulta.AllowUserToAddRows = false;
 
             // Configurar controles
-            rbtnProfesor.Checked = true; // Por defecto buscar por grupo
+            rbtnGrupo.Checked = true; // Por defecto buscar por grupo
             cmbFiltro.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 

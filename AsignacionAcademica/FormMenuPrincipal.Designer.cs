@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenuPrincipal));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -44,7 +45,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlBase = new Panel();
+            pcITSPP = new Guna.UI2.WinForms.Guna2PictureBox();
             btnProfesores = new Guna.UI2.WinForms.Guna2GradientButton();
             picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             btnAulas = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -53,6 +57,9 @@
             btnAsignarClases = new Guna.UI2.WinForms.Guna2GradientButton();
             btnConsultarAsignaciones = new Guna.UI2.WinForms.Guna2GradientButton();
             btnSalir = new Guna.UI2.WinForms.Guna2Button();
+            guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
+            guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
+            ((System.ComponentModel.ISupportInitialize)pcITSPP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
             // 
@@ -63,10 +70,23 @@
             pnlBase.Size = new Size(947, 598);
             pnlBase.TabIndex = 7;
             // 
+            // pcITSPP
+            // 
+            pcITSPP.BackColor = Color.Transparent;
+            pcITSPP.CustomizableEdges = customizableEdges1;
+            pcITSPP.Image = (Image)resources.GetObject("pcITSPP.Image");
+            pcITSPP.ImageRotate = 0F;
+            pcITSPP.Location = new Point(-1, -53);
+            pcITSPP.Name = "pcITSPP";
+            pcITSPP.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            pcITSPP.Size = new Size(192, 147);
+            pcITSPP.TabIndex = 14;
+            pcITSPP.TabStop = false;
+            // 
             // btnProfesores
             // 
             btnProfesores.Animated = true;
-            btnProfesores.CustomizableEdges = customizableEdges1;
+            btnProfesores.CustomizableEdges = customizableEdges3;
             btnProfesores.DisabledState.BorderColor = Color.DarkGray;
             btnProfesores.DisabledState.CustomBorderColor = Color.DarkGray;
             btnProfesores.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -82,30 +102,31 @@
             btnProfesores.Image = Properties.Resources.Profesores;
             btnProfesores.ImageAlign = HorizontalAlignment.Left;
             btnProfesores.ImageSize = new Size(35, 35);
-            btnProfesores.Location = new Point(0, 110);
+            btnProfesores.Location = new Point(0, 141);
             btnProfesores.Name = "btnProfesores";
-            btnProfesores.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnProfesores.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnProfesores.Size = new Size(191, 57);
             btnProfesores.TabIndex = 9;
             btnProfesores.Text = "Profesores";
             // 
             // picLogo
             // 
-            picLogo.CustomizableEdges = customizableEdges3;
+            picLogo.CustomizableEdges = customizableEdges5;
             picLogo.Image = Properties.Resources.logoTecBlanco;
             picLogo.ImageRotate = 0F;
-            picLogo.Location = new Point(12, 23);
+            picLogo.Location = new Point(12, 74);
             picLogo.Name = "picLogo";
-            picLogo.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            picLogo.Size = new Size(151, 81);
+            picLogo.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            picLogo.Size = new Size(169, 38);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
             picLogo.TabIndex = 8;
             picLogo.TabStop = false;
+            picLogo.Click += picLogo_Click;
             // 
             // btnAulas
             // 
             btnAulas.Animated = true;
-            btnAulas.CustomizableEdges = customizableEdges5;
+            btnAulas.CustomizableEdges = customizableEdges7;
             btnAulas.DisabledState.BorderColor = Color.DarkGray;
             btnAulas.DisabledState.CustomBorderColor = Color.DarkGray;
             btnAulas.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -121,9 +142,9 @@
             btnAulas.Image = Properties.Resources.Aula;
             btnAulas.ImageAlign = HorizontalAlignment.Left;
             btnAulas.ImageSize = new Size(40, 40);
-            btnAulas.Location = new Point(0, 173);
+            btnAulas.Location = new Point(0, 204);
             btnAulas.Name = "btnAulas";
-            btnAulas.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnAulas.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnAulas.Size = new Size(191, 57);
             btnAulas.TabIndex = 10;
             btnAulas.Text = "Aulas";
@@ -131,7 +152,7 @@
             // btnAsignaturas
             // 
             btnAsignaturas.Animated = true;
-            btnAsignaturas.CustomizableEdges = customizableEdges7;
+            btnAsignaturas.CustomizableEdges = customizableEdges9;
             btnAsignaturas.DisabledState.BorderColor = Color.DarkGray;
             btnAsignaturas.DisabledState.CustomBorderColor = Color.DarkGray;
             btnAsignaturas.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -147,9 +168,9 @@
             btnAsignaturas.Image = Properties.Resources.Asignaturas;
             btnAsignaturas.ImageAlign = HorizontalAlignment.Left;
             btnAsignaturas.ImageSize = new Size(40, 40);
-            btnAsignaturas.Location = new Point(0, 236);
+            btnAsignaturas.Location = new Point(0, 267);
             btnAsignaturas.Name = "btnAsignaturas";
-            btnAsignaturas.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnAsignaturas.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnAsignaturas.Size = new Size(191, 57);
             btnAsignaturas.TabIndex = 11;
             btnAsignaturas.Text = "Asignaturas";
@@ -157,7 +178,7 @@
             // btnGrupos
             // 
             btnGrupos.Animated = true;
-            btnGrupos.CustomizableEdges = customizableEdges9;
+            btnGrupos.CustomizableEdges = customizableEdges11;
             btnGrupos.DisabledState.BorderColor = Color.DarkGray;
             btnGrupos.DisabledState.CustomBorderColor = Color.DarkGray;
             btnGrupos.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -173,9 +194,9 @@
             btnGrupos.Image = Properties.Resources.Grupos;
             btnGrupos.ImageAlign = HorizontalAlignment.Left;
             btnGrupos.ImageSize = new Size(40, 40);
-            btnGrupos.Location = new Point(0, 299);
+            btnGrupos.Location = new Point(0, 330);
             btnGrupos.Name = "btnGrupos";
-            btnGrupos.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnGrupos.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnGrupos.Size = new Size(191, 57);
             btnGrupos.TabIndex = 12;
             btnGrupos.Text = "Grupos";
@@ -183,7 +204,7 @@
             // btnAsignarClases
             // 
             btnAsignarClases.Animated = true;
-            btnAsignarClases.CustomizableEdges = customizableEdges11;
+            btnAsignarClases.CustomizableEdges = customizableEdges13;
             btnAsignarClases.DisabledState.BorderColor = Color.DarkGray;
             btnAsignarClases.DisabledState.CustomBorderColor = Color.DarkGray;
             btnAsignarClases.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -199,9 +220,9 @@
             btnAsignarClases.Image = Properties.Resources.AsignarClases;
             btnAsignarClases.ImageAlign = HorizontalAlignment.Left;
             btnAsignarClases.ImageSize = new Size(40, 40);
-            btnAsignarClases.Location = new Point(0, 362);
+            btnAsignarClases.Location = new Point(0, 393);
             btnAsignarClases.Name = "btnAsignarClases";
-            btnAsignarClases.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnAsignarClases.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btnAsignarClases.Size = new Size(191, 57);
             btnAsignarClases.TabIndex = 13;
             btnAsignarClases.Text = "Asignar clases";
@@ -210,7 +231,7 @@
             // 
             btnConsultarAsignaciones.Animated = true;
             btnConsultarAsignaciones.BackColor = Color.Transparent;
-            btnConsultarAsignaciones.CustomizableEdges = customizableEdges13;
+            btnConsultarAsignaciones.CustomizableEdges = customizableEdges15;
             btnConsultarAsignaciones.DisabledState.BorderColor = Color.DarkGray;
             btnConsultarAsignaciones.DisabledState.CustomBorderColor = Color.DarkGray;
             btnConsultarAsignaciones.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -226,9 +247,9 @@
             btnConsultarAsignaciones.Image = Properties.Resources.ConsultarAsignaciones;
             btnConsultarAsignaciones.ImageAlign = HorizontalAlignment.Left;
             btnConsultarAsignaciones.ImageSize = new Size(40, 40);
-            btnConsultarAsignaciones.Location = new Point(0, 425);
+            btnConsultarAsignaciones.Location = new Point(0, 456);
             btnConsultarAsignaciones.Name = "btnConsultarAsignaciones";
-            btnConsultarAsignaciones.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            btnConsultarAsignaciones.ShadowDecoration.CustomizableEdges = customizableEdges16;
             btnConsultarAsignaciones.Size = new Size(191, 57);
             btnConsultarAsignaciones.TabIndex = 10;
             btnConsultarAsignaciones.Text = "Consultar asignaciones";
@@ -237,7 +258,7 @@
             // 
             btnSalir.BackColor = Color.Transparent;
             btnSalir.BorderRadius = 10;
-            btnSalir.CustomizableEdges = customizableEdges15;
+            btnSalir.CustomizableEdges = customizableEdges17;
             btnSalir.DisabledState.BorderColor = Color.DarkGray;
             btnSalir.DisabledState.CustomBorderColor = Color.DarkGray;
             btnSalir.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -248,11 +269,25 @@
             btnSalir.HoverState.FillColor = Color.FromArgb(63, 111, 255);
             btnSalir.Image = Properties.Resources.cerrar_sesion__2_;
             btnSalir.ImageSize = new Size(30, 30);
-            btnSalir.Location = new Point(12, 548);
+            btnSalir.Location = new Point(12, 543);
             btnSalir.Name = "btnSalir";
-            btnSalir.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            btnSalir.Size = new Size(43, 37);
+            btnSalir.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            btnSalir.Size = new Size(42, 42);
             btnSalir.TabIndex = 0;
+            // 
+            // guna2Separator1
+            // 
+            guna2Separator1.Location = new Point(7, 122);
+            guna2Separator1.Name = "guna2Separator1";
+            guna2Separator1.Size = new Size(174, 10);
+            guna2Separator1.TabIndex = 0;
+            // 
+            // guna2Separator2
+            // 
+            guna2Separator2.Location = new Point(7, 519);
+            guna2Separator2.Name = "guna2Separator2";
+            guna2Separator2.Size = new Size(174, 10);
+            guna2Separator2.TabIndex = 15;
             // 
             // FormMenuPrincipal
             // 
@@ -260,6 +295,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(27, 57, 106);
             ClientSize = new Size(1139, 597);
+            Controls.Add(guna2Separator2);
+            Controls.Add(guna2Separator1);
+            Controls.Add(picLogo);
+            Controls.Add(pcITSPP);
             Controls.Add(btnSalir);
             Controls.Add(btnConsultarAsignaciones);
             Controls.Add(btnAsignarClases);
@@ -267,10 +306,11 @@
             Controls.Add(btnAsignaturas);
             Controls.Add(btnAulas);
             Controls.Add(btnProfesores);
-            Controls.Add(picLogo);
             Controls.Add(pnlBase);
             Name = "FormMenuPrincipal";
             Text = "TecNM";
+            Load += FormMenuPrincipal_Load;
+            ((System.ComponentModel.ISupportInitialize)pcITSPP).EndInit();
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ResumeLayout(false);
         }
@@ -285,5 +325,9 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnAsignarClases;
         private Guna.UI2.WinForms.Guna2GradientButton btnConsultarAsignaciones;
         private Guna.UI2.WinForms.Guna2Button btnSalir;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2PictureBox pcITSPP;
+        private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
+        private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
     }
 }

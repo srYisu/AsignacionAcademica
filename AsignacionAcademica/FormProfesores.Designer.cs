@@ -76,9 +76,9 @@
             lblEspecialidad.ForeColor = Color.White;
             lblEspecialidad.Location = new Point(32, 273);
             lblEspecialidad.Name = "lblEspecialidad";
-            lblEspecialidad.Size = new Size(65, 15);
+            lblEspecialidad.Size = new Size(72, 15);
             lblEspecialidad.TabIndex = 2;
-            lblEspecialidad.Text = "Especialida";
+            lblEspecialidad.Text = "Especialidad";
             // 
             // txtEspecialidad
             // 
