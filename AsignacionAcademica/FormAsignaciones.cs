@@ -62,7 +62,7 @@ namespace AsignacionAcademica
             ConsultaProfesores consultaP = new ConsultaProfesores();
             List<GestionProfesores> profesores = consultaP.GetProfesores(null);
             cmbProfesor.DataSource = profesores;
-            cmbProfesor.DisplayMember = "apellidoPaterno"; // Asumo que existe esta propiedad
+            cmbProfesor.DisplayMember = "nombre"; // Asumo que existe esta propiedad
             cmbProfesor.ValueMember = "id";
 
             // Aulas
