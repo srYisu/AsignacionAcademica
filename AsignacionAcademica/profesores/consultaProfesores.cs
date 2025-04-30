@@ -106,24 +106,5 @@ namespace AsignacionAcademica
                 return dt;
             }
         }
-
-        // Método para obtener un profesor por ID
-        public DataRow ObtenerProfesorPorId(int idProfesor)
-        {
-            using (MySqlConnection conn = conexion.ObtenerConexion())
-            {
-                conn.Open();
-                string query = @"SELECT * FROM profesores WHERE idProfesores = @idProfesor";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
-                adapter.SelectCommand.Parameters.AddWithValue("@idProfesor", idProfesor);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                if (dt.Rows.Count > 0)
-                    return dt.Rows[0];
-                else
-                    return null;
-            }
-        }
     }
 }
