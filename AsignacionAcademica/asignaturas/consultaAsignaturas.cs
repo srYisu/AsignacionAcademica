@@ -36,15 +36,40 @@ namespace AsignacionAcademica.asignaturas
         {
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                conn.Open();
-                string query = @"DELETE FROM asignaturas WHERE idAsignaturas = @idAsignatura";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                try
                 {
-                    cmd.Parameters.AddWithValue("@idAsignatura", idAsignatura);
-                    return cmd.ExecuteNonQuery() > 0;
+                    conn.Open();
+
+                    // Verificar si la asignatura está vinculada a una clase
+                    string queryVerificarClases = @"SELECT COUNT(*) FROM clases WHERE asignatura_id = @idAsignatura";
+                    using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificarClases, conn))
+                    {
+                        cmdVerificar.Parameters.AddWithValue("@idAsignatura", idAsignatura);
+                        int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                        if (clasesAsignadas > 0)
+                        {
+                            MessageBox.Show("La asignatura está asignada a una clase. Elimina la clase primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+                    }
+
+                    // Eliminar la asignatura si no está vinculada a ninguna clase
+                    string queryEliminar = @"DELETE FROM asignaturas WHERE idAsignaturas = @idAsignatura";
+                    using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
+                    {
+                        cmdEliminar.Parameters.AddWithValue("@idAsignatura", idAsignatura);
+                        return cmdEliminar.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al eliminar la asignatura: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
         }
+
 
         // Método para actualizar una asignatura
         public bool ActualizarAsignatura(int idAsignatura, string asignatura, string tipo)
