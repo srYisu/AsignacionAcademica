@@ -18,10 +18,29 @@ namespace AsignacionAcademica.asignaciones
             {
                 conn.Open();
 
+                // Validar que el grupo no tenga otra clase en el mismo día y horario
+                string queryGrupoClase = @"SELECT COUNT(*) FROM clases 
+                                   WHERE grupo_id = @grupoId AND dia = @dia 
+                                   AND ((hora_inicio < @horaFin AND hora_fin > @horaInicio))";
+                using (MySqlCommand cmd = new MySqlCommand(queryGrupoClase, conn))
+                {
+                    cmd.Parameters.AddWithValue("@grupoId", grupoId);
+                    cmd.Parameters.AddWithValue("@dia", dia);
+                    cmd.Parameters.AddWithValue("@horaInicio", horaInicio);
+                    cmd.Parameters.AddWithValue("@horaFin", horaFin);
+
+                    int enUso = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (enUso > 0)
+                    {
+                        MessageBox.Show("El grupo ya tiene otra clase asignada en este horario.");
+                        return false;
+                    }
+                }
+
                 // Validar que el profesor no tenga otra clase en ese horario
                 string queryProfesorClase = @"SELECT COUNT(*) FROM clases 
-                                WHERE profesor_id = @profesorId AND dia = @dia 
-                                AND ((hora_inicio < @horaFin AND hora_fin > @horaInicio))";
+                                      WHERE profesor_id = @profesorId AND dia = @dia 
+                                      AND ((hora_inicio < @horaFin AND hora_fin > @horaInicio))";
                 using (MySqlCommand cmd = new MySqlCommand(queryProfesorClase, conn))
                 {
                     cmd.Parameters.AddWithValue("@profesorId", profesorId);
@@ -32,15 +51,15 @@ namespace AsignacionAcademica.asignaciones
                     int enUso = Convert.ToInt32(cmd.ExecuteScalar());
                     if (enUso > 0)
                     {
-                        MessageBox.Show("El profesor ya tiene otra clase en ese horario.");
+                        MessageBox.Show("El profesor ya tiene otra clase en este horario.");
                         return false;
                     }
                 }
 
                 // Validar que el aula no tenga otra clase en ese horario
                 string queryAulaClase = @"SELECT COUNT(*) FROM clases 
-                            WHERE aula_id = @aulaId AND dia = @dia 
-                            AND ((hora_inicio < @horaFin AND hora_fin > @horaInicio))";
+                                  WHERE aula_id = @aulaId AND dia = @dia 
+                                  AND ((hora_inicio < @horaFin AND hora_fin > @horaInicio))";
                 using (MySqlCommand cmd = new MySqlCommand(queryAulaClase, conn))
                 {
                     cmd.Parameters.AddWithValue("@aulaId", aulaId);
@@ -51,14 +70,14 @@ namespace AsignacionAcademica.asignaciones
                     int enUso = Convert.ToInt32(cmd.ExecuteScalar());
                     if (enUso > 0)
                     {
-                        MessageBox.Show("El aula ya está ocupada en ese horario.");
+                        MessageBox.Show("El aula ya está ocupada en este horario.");
                         return false;
                     }
                 }
 
                 // Insertar la clase si todo es válido
                 string insertQuery = @"INSERT INTO clases (grupo_id, profesor_id, aula_id, asignatura_id, dia, hora_inicio, hora_fin)
-                       VALUES (@grupoId, @profesorId, @aulaId, @asignaturaId, @dia, @horaInicio, @horaFin)";
+                               VALUES (@grupoId, @profesorId, @aulaId, @asignaturaId, @dia, @horaInicio, @horaFin)";
                 using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, conn))
                 {
                     insertCmd.Parameters.AddWithValue("@grupoId", grupoId);
@@ -74,6 +93,7 @@ namespace AsignacionAcademica.asignaciones
                 }
             }
         }
+
 
         // ELIMINAR clase
         public bool EliminarClase(int idClase)

@@ -1,7 +1,7 @@
-﻿using AsignacionAcademica.profesores;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AsignacionAcademica
@@ -9,150 +9,121 @@ namespace AsignacionAcademica
     internal class ConsultaProfesores
     {
         private Conexion conexion;
+
         public ConsultaProfesores()
         {
             conexion = new Conexion();
         }
 
-        public List<GestionProfesores> GetProfesores(string filtro)
+        // Método para agregar un profesor
+        public bool GuardarProfesor(string nombre, string apellidoP, string apellidoM, string especialidad)
         {
-            List<GestionProfesores> profesores = new List<GestionProfesores>();
-            string query = "SELECT * FROM profesores";
-            MySqlDataReader reader = null;
-
-            if (!string.IsNullOrWhiteSpace(filtro))
-            {
-                query += " WHERE nombre LIKE @filtro OR apellidoP LIKE @filtro OR apellidoM LIKE @filtro OR especialidad LIKE @filtro";
-            }
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
+                conn.Open();
+                string query = @"INSERT INTO profesores (nombre, apellido_P, apellido_M, especialidad) 
+                             VALUES (@nombre, @apellidoP, @apellidoM, @especialidad)";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        if (!string.IsNullOrWhiteSpace(filtro))
-                            cmd.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@apellidoP", apellidoP);
+                    cmd.Parameters.AddWithValue("@apellidoM", apellidoM);
+                    cmd.Parameters.AddWithValue("@especialidad", especialidad);
 
-                        reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            profesores.Add(new GestionProfesores
-                            {
-                                id = reader.GetInt32("idProfesores"),
-                                nombre = reader.GetString("nombre"),
-                                apellidoPaterno = reader.GetString("apellido_P"),
-                                apellidoMaterno = reader.GetString("apellido_M"),
-                                especialidad = reader.GetString("especialidad"),
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al obtener profesores: " + ex.Message);
-                }
-                finally
-                {
-                    reader?.Close();
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
-
-            return profesores;
         }
 
-        public bool AgregarProfesor(GestionProfesores profesor)
+        // Método para eliminar un profesor
+        public bool EliminarProfesor(int idProfesor)
         {
-            string query = "INSERT INTO profesores (nombre, apellido_P, apellido_M, especialidad) VALUES (@nombre, @apellidoP, @apellidoM, @especialidad)";
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
-                {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", profesor.nombre);
-                        cmd.Parameters.AddWithValue("@apellidoP", profesor.apellidoPaterno);
-                        cmd.Parameters.AddWithValue("@apellidoM", profesor.apellidoMaterno);
-                        cmd.Parameters.AddWithValue("@especialidad", profesor.especialidad);
+                conn.Open();
 
-                        return cmd.ExecuteNonQuery() > 0;
+                // Verificar si el profesor tiene clases asignadas
+                string queryVerificar = @"SELECT COUNT(*) FROM clases WHERE profesor_id = @idProfesor";
+                using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificar, conn))
+                {
+                    cmdVerificar.Parameters.AddWithValue("@idProfesor", idProfesor);
+                    int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                    if (clasesAsignadas > 0)
+                    {
+                        MessageBox.Show("El profesor tiene clases asignadas. Elimina las clases primero.");
+                        return false;
                     }
                 }
-                catch (Exception ex)
+
+                // Eliminar el profesor si no tiene clases asignadas
+                string queryEliminar = @"DELETE FROM profesores WHERE idProfesores = @idProfesor";
+                using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
                 {
-                    MessageBox.Show("Error al agregar profesor: " + ex.Message);
-                    return false;
+                    cmdEliminar.Parameters.AddWithValue("@idProfesor", idProfesor);
+                    return cmdEliminar.ExecuteNonQuery() > 0;
                 }
             }
         }
 
-        public bool EditarProfesor(GestionProfesores profesor, int id)
+        // Método para actualizar un profesor
+        public bool ActualizarProfesor(int idProfesor, string nombre, string apellidoP, string apellidoM, string especialidad)
         {
-            string query = $"UPDATE profesores SET nombre=@nombre, apellido_P=@apellidoP, apellido_M=@apellidoM, especialidad=@especialidad WHERE idProfesores={id}";
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
+                conn.Open();
+                string query = @"UPDATE profesores 
+                             SET nombre = @nombre, apellido_P = @apellidoP, apellido_M = @apellidoM, especialidad = @especialidad 
+                             WHERE idProfesores = @idProfesor";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@id", profesor.id);
-                        cmd.Parameters.AddWithValue("@nombre", profesor.nombre);
-                        cmd.Parameters.AddWithValue("@apellidoP", profesor.apellidoPaterno);
-                        cmd.Parameters.AddWithValue("@apellidoM", profesor.apellidoMaterno);
-                        cmd.Parameters.AddWithValue("@especialidad", profesor.especialidad);
+                    cmd.Parameters.AddWithValue("@idProfesor", idProfesor);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@apellidoP", apellidoP);
+                    cmd.Parameters.AddWithValue("@apellidoM", apellidoM);
+                    cmd.Parameters.AddWithValue("@especialidad", especialidad);
 
-                        return cmd.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al editar profesor: " + ex.Message);
-                    return false;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }
 
-        public bool EliminarProfesor(int id)
-{
-    using (MySqlConnection conn = conexion.ObtenerConexion())
-    {
-        try
+        // Método para consultar todos los profesores
+        public DataTable ConsultarProfesores()
         {
-            conn.Open();
-
-            // Verificar si el profesor tiene clases asignadas
-            string queryVerificarClases = "SELECT COUNT(*) FROM clases WHERE profesor_id = @id";
-            using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificarClases, conn))
+            using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                cmdVerificar.Parameters.AddWithValue("@id", id);
-                int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
-
-                if (clasesAsignadas > 0)
-                {
-                    MessageBox.Show("Este profesor se encuentra asignado a una clase. Elimina la clase primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-            }
-
-            // Eliminar el profesor si no tiene clases asignadas
-            string queryEliminar = "DELETE FROM profesores WHERE idProfesores = @id";
-            using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
-            {
-                cmdEliminar.Parameters.AddWithValue("@id", id);
-                return cmdEliminar.ExecuteNonQuery() > 0;
+                conn.Open();
+                string query = @"SELECT idProfesores AS ID, 
+                                    nombre AS Nombre, 
+                                    apellido_P AS ApellidoPaterno, 
+                                    apellido_M AS ApellidoMaterno, 
+                                    especialidad AS Especialidad
+                             FROM profesores";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
             }
         }
-        catch (Exception ex)
+
+        // Método para obtener un profesor por ID
+        public DataRow ObtenerProfesorPorId(int idProfesor)
         {
-            MessageBox.Show("Error al eliminar profesor: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
+            using (MySqlConnection conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+                string query = @"SELECT * FROM profesores WHERE idProfesores = @idProfesor";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@idProfesor", idProfesor);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                    return dt.Rows[0];
+                else
+                    return null;
+            }
         }
-    }
-}
     }
 }

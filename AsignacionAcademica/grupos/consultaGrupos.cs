@@ -5,153 +5,127 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace AsignacionAcademica.grupos
 {
     internal class consultaGrupos
     {
         private Conexion conexion;
+
         public consultaGrupos()
         {
             conexion = new Conexion();
         }
 
-        public List<GestionGrupos> GetGrupos(string filtro)
+        // Método para agregar un grupo
+        public bool GuardarGrupo(string nombre, int numAlumnos, string carrera)
         {
-            List<GestionGrupos> grupos = new List<GestionGrupos>();
-            string query = "SELECT * FROM grupos";
-            MySqlDataReader reader = null;
-
-            if (!string.IsNullOrWhiteSpace(filtro))
-            {
-                query += " WHERE nombre LIKE @filtro OR apellidoP LIKE @filtro OR apellidoM LIKE @filtro OR especialidad LIKE @filtro";
-            }
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
+                conn.Open();
+                string query = @"INSERT INTO grupos (nombre, n_alumnos, curso) 
+                             VALUES (@nombre, @numAlumnos, @carrera)";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        if (!string.IsNullOrWhiteSpace(filtro))
-                            cmd.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@numAlumnos", numAlumnos);
+                    cmd.Parameters.AddWithValue("@carrera", carrera);
 
-                        reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            grupos.Add(new GestionGrupos
-                            {
-                                id = reader.GetInt32("idGrupos"),
-                                grupo = reader.GetString("nombre"),
-                                numAlumnos = reader.GetInt32("n_alumnos"),
-                                carrera = reader.GetString("curso")
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al obtener grupos: " + ex.Message);
-                }
-                finally
-                {
-                    reader?.Close();
-                }
-            }
-
-            return grupos;
-        }
-
-        public bool AgregarGrupo(GestionGrupos grupos)
-        {
-            string query = "INSERT INTO grupos (nombre, n_alumnos, curso) VALUES (@nombre, @numAlumnos, @carrera)";
-
-            using (MySqlConnection conn = conexion.ObtenerConexion())
-            {
-                try
-                {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", grupos.grupo);
-                        cmd.Parameters.AddWithValue("@numAlumnos", grupos.numAlumnos);
-                        cmd.Parameters.AddWithValue("@carrera", grupos.carrera);
-
-                        return cmd.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al agregar el grupo: " + ex.Message);
-                    return false;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }
 
-        public bool EditarGrupos(GestionGrupos grupos, int id)
+        // Método para eliminar un grupo
+        public bool EliminarGrupo(int idGrupo)
         {
-            string query = $"UPDATE grupos SET nombre=@nombre, n_alumnos=@numAlumnos, curso=@carrera WHERE idGrupos={id}";
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
-                {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", grupos.grupo);
-                        cmd.Parameters.AddWithValue("@numAlumnos", grupos.numAlumnos);
-                        cmd.Parameters.AddWithValue("@carrera", grupos.carrera);
+                conn.Open();
 
-                        return cmd.ExecuteNonQuery() > 0;
+                // Verificar si el grupo tiene clases asignadas
+                string queryVerificar = @"SELECT COUNT(*) FROM clases WHERE grupo_id = @idGrupo";
+                using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificar, conn))
+                {
+                    cmdVerificar.Parameters.AddWithValue("@idGrupo", idGrupo);
+                    int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                    if (clasesAsignadas > 0)
+                    {
+                        MessageBox.Show("Este grupo tiene clases asignadas. Elimina las clases primero.");
+                        return false;
                     }
                 }
-                catch (Exception ex)
+
+                // Eliminar el grupo si no tiene clases asignadas
+                string queryEliminar = @"DELETE FROM grupos WHERE idGrupos = @idGrupo";
+                using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
                 {
-                    MessageBox.Show("Error al editar grupo: " + ex.Message);
-                    return false;
+                    cmdEliminar.Parameters.AddWithValue("@idGrupo", idGrupo);
+                    return cmdEliminar.ExecuteNonQuery() > 0;
                 }
             }
         }
 
-        public bool EliminarGrupo(int id)
+        // Método para actualizar un grupo
+        public bool ActualizarGrupo(int idGrupo, string nombre, int numAlumnos, string carrera)
         {
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
+                conn.Open();
+                string query = @"UPDATE grupos 
+                             SET nombre = @nombre, n_alumnos = @numAlumnos, curso = @carrera 
+                             WHERE idGrupos = @idGrupo";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    conn.Open();
+                    cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@numAlumnos", numAlumnos);
+                    cmd.Parameters.AddWithValue("@carrera", carrera);
 
-                    // Verificar si el grupo tiene clases asignadas
-                    string queryVerificarClases = "SELECT COUNT(*) FROM clases WHERE grupo_id = @id";
-                    using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificarClases, conn))
-                    {
-                        cmdVerificar.Parameters.AddWithValue("@id", id);
-                        int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
-
-                        if (clasesAsignadas > 0)
-                        {
-                            MessageBox.Show("Este grupo se encuentra asignado a una clase. Elimina la clase primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return false;
-                        }
-                    }
-
-                    // Eliminar el grupo si no tiene clases asignadas
-                    string queryEliminar = "DELETE FROM grupos WHERE idGrupos = @id";
-                    using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
-                    {
-                        cmdEliminar.Parameters.AddWithValue("@id", id);
-                        return cmdEliminar.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al eliminar grupo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }
 
+        // Método para consultar todos los grupos
+        public DataTable ConsultarGrupos()
+        {
+            using (MySqlConnection conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+                string query = @"SELECT idGrupos AS ID, 
+                                    nombre AS Grupo, 
+                                    n_alumnos AS NumeroAlumnos, 
+                                    curso AS Carrera
+                             FROM grupos";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+
+        // Método para obtener un grupo por ID
+        public DataRow ObtenerGrupoPorId(int idGrupo)
+        {
+            using (MySqlConnection conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+                string query = @"SELECT * FROM grupos WHERE idGrupos = @idGrupo";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@idGrupo", idGrupo);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                    return dt.Rows[0];
+                else
+                    return null;
+            }
+        }
     }
+
+
 }

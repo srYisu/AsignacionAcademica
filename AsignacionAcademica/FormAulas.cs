@@ -1,125 +1,111 @@
-﻿using AsignacionAcademica.profesores;
+﻿using AsignacionAcademica.aulas;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using AsignacionAcademica.aulas;
 
 namespace AsignacionAcademica
 {
     public partial class FormAulas : Form
     {
-        private List<GestionAulas> aulas;
-        Conexion Conexion;
         private consultaAulas consultaAulas;
-        private GestionAulas gestionAulas;
-        int aulaId = 0;
+        private int aulaId = 0;
+
         public FormAulas()
         {
             InitializeComponent();
-            configTabla();
-
-            aulas = new List<GestionAulas>();
             consultaAulas = new consultaAulas();
-            gestionAulas = new GestionAulas();
-            pnlBotonActualizar.Visible = false;
             CargarAulas();
+            pnlBotonActualizar.Visible = false;
         }
-        private void configTabla()
+
+        private void CargarAulas()
         {
-            // Configuración de la tabla
-            dgvAulas.AllowUserToAddRows = false;
-
-            dgvAulas.Columns.Add("id", "ID");
-            dgvAulas.Columns.Add("nombre", "Nombre del aula");
-            dgvAulas.Columns.Add("capacidad", "Capacidad");
-            dgvAulas.Columns.Add("ubicacion", "Ubicación");
-
-            // Establecer el modo de selección de filas
-            dgvAulas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAulas.DataSource = consultaAulas.ConsultarAulas();
         }
-        private void CargarAulas(string filtro = "")
-        {
-            dgvAulas.Rows.Clear();
-            dgvAulas.Refresh();
-            aulas.Clear();
-            aulas = consultaAulas.GetAulas(filtro);
 
-            for (int i = 0; i < aulas.Count; i++)
-            {
-                dgvAulas.Rows.Add
-                    (aulas[i].id,
-                    aulas[i].nombre,
-                    aulas[i].capacidad,
-                    aulas[i].ubicacion);
-            }
-        }
         private void GuardarAula()
         {
-            gestionAulas.nombre = txtNombreAula.Text;
-            gestionAulas.capacidad = int.Parse(txtCapacidad.Text);
-            gestionAulas.ubicacion = txtUbicacion.Text;
+            string nombre = txtNombreAula.Text;
+            int capacidad = int.Parse(txtCapacidad.Text);
+            string ubicacion = txtUbicacion.Text;
 
-            if (consultaAulas.AgregarAula(gestionAulas))
+            if (consultaAulas.GuardarAula(nombre, capacidad, ubicacion))
             {
                 MessageBox.Show("Aula agregada correctamente");
                 CargarAulas();
                 LimpiarCampos();
             }
-
-        }
-        private void LimpiarCampos()
-        {
-            txtNombreAula.Clear();
-            txtCapacidad.Clear();
-            txtUbicacion.Clear();
-        }
-        private void EliminarAulas()
-        {
-            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar esta aula?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
+            else
             {
-                if (dgvAulas.SelectedRows.Count > 0)
+                MessageBox.Show("Error al agregar el aula");
+            }
+        }
+
+        private void EditarAula()
+        {
+            if (dgvAulas.SelectedRows.Count > 0)
+            {
+                aulaId = Convert.ToInt32(dgvAulas.SelectedRows[0].Cells["ID"].Value);
+                txtNombreAula.Text = dgvAulas.SelectedRows[0].Cells["Nombre"].Value.ToString();
+                txtCapacidad.Text = dgvAulas.SelectedRows[0].Cells["Capacidad"].Value.ToString();
+                txtUbicacion.Text = dgvAulas.SelectedRows[0].Cells["Ubicacion"].Value.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un aula para editar");
+            }
+        }
+
+        private void ActualizarAula()
+        {
+            string nombre = txtNombreAula.Text;
+            int capacidad = int.Parse(txtCapacidad.Text);
+            string ubicacion = txtUbicacion.Text;
+
+            if (consultaAulas.ActualizarAula(aulaId, nombre, capacidad, ubicacion))
+            {
+                MessageBox.Show("Aula actualizada correctamente");
+                CargarAulas();
+                LimpiarCampos();
+                pnlBotonActualizar.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar el aula");
+            }
+        }
+
+        private void EliminarAula()
+        {
+            if (dgvAulas.SelectedRows.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar esta aula?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
                 {
-                    int id = Convert.ToInt32(dgvAulas.SelectedRows[0].Cells[0].Value);
+                    int id = Convert.ToInt32(dgvAulas.SelectedRows[0].Cells["ID"].Value);
                     if (consultaAulas.EliminarAula(id))
                     {
                         MessageBox.Show("Aula eliminada correctamente");
                         CargarAulas();
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione un aula para eliminar");
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar el aula");
+                    }
                 }
             }
-        }
-        private void EditarAula()
-        {
-            if (dgvAulas.SelectedRows.Count > 0)
+            else
             {
-                aulaId = Convert.ToInt32(dgvAulas.SelectedRows[0].Cells[0].Value);
-                txtNombreAula.Text = dgvAulas.SelectedRows[0].Cells[1].Value.ToString();
-                txtCapacidad.Text = dgvAulas.SelectedRows[0].Cells[2].Value.ToString();
-                txtUbicacion.Text = dgvAulas.SelectedRows[0].Cells[3].Value.ToString();
+                MessageBox.Show("Seleccione un aula para eliminar");
             }
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void LimpiarCampos()
         {
-            FormMenuPrincipal formMenuPrincipal = new FormMenuPrincipal();
-            formMenuPrincipal.Show();
-            this.Hide();
-        }
-
-        private void FormAulas_Load(object sender, EventArgs e)
-        {
-
+            txtNombreAula.Clear();
+            txtCapacidad.Clear();
+            txtUbicacion.Clear();
+            aulaId = 0;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -127,44 +113,28 @@ namespace AsignacionAcademica
             GuardarAula();
         }
 
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            ActualizarAula();
+        }
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            EliminarAulas();
+            EliminarAula();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            pnlBotonActualizar.Visible = true;
             EditarAula();
-            btnLimpiar.Text = "Cancelar";
-        }
-
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            gestionAulas.nombre = txtNombreAula.Text;
-            gestionAulas.capacidad = int.Parse(txtCapacidad.Text);
-            gestionAulas.ubicacion = txtUbicacion.Text;
-
-            if (consultaAulas.EditarAula(gestionAulas, aulaId))
-            {
-                MessageBox.Show("Aula actualizada correctamente");
-                CargarAulas();
-                LimpiarCampos();
-                pnlBotonActualizar.Visible = false;
-                btnLimpiar.Text = "Limpiar";
-            }
+            pnlBotonActualizar.Visible = true;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            pnlBotonActualizar.Visible = false;
             LimpiarCampos();
-            btnLimpiar.Text = "Limpiar";
-        }
-
-        private void dgvAulas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            pnlBotonActualizar.Visible = false;
         }
     }
 }
+
+

@@ -1,5 +1,4 @@
 ﻿using AsignacionAcademica.grupos;
-using AsignacionAcademica.profesores;
 using AsignacionAcademica.aulas;
 using AsignacionAcademica.asignaturas;
 using System;
@@ -53,31 +52,33 @@ namespace AsignacionAcademica
         {
             // Grupos
             consultaGrupos consultaG = new consultaGrupos();
-            List<GestionGrupos> grupos = consultaG.GetGrupos(null);
+            DataTable grupos = consultaG.ConsultarGrupos(); // Usar el método actualizado
             cmbGrupo.DataSource = grupos;
-            cmbGrupo.DisplayMember = "grupo";
-            cmbGrupo.ValueMember = "id";
+            cmbGrupo.DisplayMember = "Grupo"; // Alias definido en la consulta SQL
+            cmbGrupo.ValueMember = "ID";
 
             // Profesores
             ConsultaProfesores consultaP = new ConsultaProfesores();
-            List<GestionProfesores> profesores = consultaP.GetProfesores(null);
+            DataTable profesores = consultaP.ConsultarProfesores(); // Usar el método actualizado
             cmbProfesor.DataSource = profesores;
-            cmbProfesor.DisplayMember = "nombre"; // Asumo que existe esta propiedad
-            cmbProfesor.ValueMember = "id";
+            cmbProfesor.DisplayMember = "Nombre"; // Alias definido en la consulta SQL
+            cmbProfesor.ValueMember = "ID";
 
             // Aulas
             consultaAulas consultaA = new consultaAulas();
-            List<GestionAulas> aulas = consultaA.GetAulas(null);
+            DataTable aulas = consultaA.ConsultarAulas(); // Usar el método actualizado
             cmbAula.DataSource = aulas;
-            cmbAula.DisplayMember = "nombre";
-            cmbAula.ValueMember = "id";
+            cmbAula.DisplayMember = "Nombre"; // Alias definido en la consulta SQL
+            cmbAula.ValueMember = "ID";      // Alias definido en la consulta SQL
+
 
             // Asignaturas
             consultaAsignaturas consultaAsig = new consultaAsignaturas();
-            List<GestionAsignaturas> asignaturas = consultaAsig.GetAsignaturas(null);
+            DataTable asignaturas = consultaAsig.ConsultarAsignaturas(); // Usar el método actualizado
             cmbAsignatura.DataSource = asignaturas;
-            cmbAsignatura.DisplayMember = "asignatura";
-            cmbAsignatura.ValueMember = "id";
+            cmbAsignatura.DisplayMember = "Asignatura"; // Alias definido en la consulta SQL
+            cmbAsignatura.ValueMember = "ID";          // Alias definido en la consulta SQL
+
 
             // Días de la semana
             cmDia.Items.AddRange(new string[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" });

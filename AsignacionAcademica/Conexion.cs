@@ -10,6 +10,7 @@ namespace AsignacionAcademica
     internal class Conexion
     {
         private const string connectionString = $"server=localhost;user=root;password=;database=asignacionescolar";
+        //método para probar la conexión a la base de datos
         public void PruebaConexion()
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))

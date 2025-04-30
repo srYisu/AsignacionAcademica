@@ -15,118 +15,105 @@ namespace AsignacionAcademica
 {
     public partial class FormGrupos : Form
     {
-        private List<GestionGrupos> grupos;
-        Conexion Conexion;
         private consultaGrupos consultaGrupos;
-        private GestionGrupos gestionGrupos;
-        int grupoId = 0;
+        private int grupoId = 0;
+
         public FormGrupos()
         {
             InitializeComponent();
-            configTabla();
-            pnlBotonActualizar.Visible = false;
-
-            grupos = new List<GestionGrupos>();
             consultaGrupos = new consultaGrupos();
-            gestionGrupos = new GestionGrupos();
-            pnlBotonActualizar.Visible = false;
             CargarGrupos();
+            pnlBotonActualizar.Visible = false;
         }
-        private void configTabla()
+
+        private void CargarGrupos()
         {
-            // Configuración de la tabla
-            dgvGrupos.AllowUserToAddRows = false;
-
-            dgvGrupos.Columns.Add("id", "ID");
-            dgvGrupos.Columns.Add("grupo", "Grupo");
-            dgvGrupos.Columns.Add("n_alumnos", "Número de alumnos");
-            dgvGrupos.Columns.Add("carrera", "Carrera");
-
-            // Establecer el modo de selección de filas
-            dgvGrupos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvGrupos.DataSource = consultaGrupos.ConsultarGrupos();
         }
-        private void CargarGrupos(string filtro = "")
-        {
-            dgvGrupos.Rows.Clear();
-            dgvGrupos.Refresh();
-            grupos.Clear();
-            grupos = consultaGrupos.GetGrupos(filtro);
 
-            for (int i = 0; i < grupos.Count; i++)
-            {
-                dgvGrupos.Rows.Add
-                    (grupos[i].id,
-                    grupos[i].grupo,
-                    grupos[i].numAlumnos,
-                    grupos[i].carrera);
-            }
-        }
         private void GuardarGrupo()
         {
-            gestionGrupos.grupo = txtGrupo.Text;
-            gestionGrupos.numAlumnos = int.Parse(txtNumAlumnos.Text);
-            gestionGrupos.carrera = cmbCarrera.Text;
+            string nombre = txtGrupo.Text;
+            int numAlumnos = int.Parse(txtNumAlumnos.Text);
+            string carrera = cmbCarrera.Text;
 
-            if (consultaGrupos.AgregarGrupo(gestionGrupos))
+            if (consultaGrupos.GuardarGrupo(nombre, numAlumnos, carrera))
             {
                 MessageBox.Show("Grupo agregado correctamente");
                 CargarGrupos();
                 LimpiarCampos();
             }
+            else
+            {
+                MessageBox.Show("Error al agregar el grupo");
+            }
+        }
 
-        }
-        private void LimpiarCampos()
+        private void EditarGrupo()
         {
-            txtGrupo.Clear();
-            txtNumAlumnos.Clear();
-            cmbCarrera.SelectedIndex = -1;
+            if (dgvGrupos.SelectedRows.Count > 0)
+            {
+                grupoId = Convert.ToInt32(dgvGrupos.SelectedRows[0].Cells["ID"].Value);
+                txtGrupo.Text = dgvGrupos.SelectedRows[0].Cells["Grupo"].Value.ToString();
+                txtNumAlumnos.Text = dgvGrupos.SelectedRows[0].Cells["NumeroAlumnos"].Value.ToString();
+                cmbCarrera.Text = dgvGrupos.SelectedRows[0].Cells["Carrera"].Value.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un grupo para editar");
+            }
         }
+
+        private void ActualizarGrupo()
+        {
+            string nombre = txtGrupo.Text;
+            int numAlumnos = int.Parse(txtNumAlumnos.Text);
+            string carrera = cmbCarrera.Text;
+
+            if (consultaGrupos.ActualizarGrupo(grupoId, nombre, numAlumnos, carrera))
+            {
+                MessageBox.Show("Grupo actualizado correctamente");
+                CargarGrupos();
+                LimpiarCampos();
+                pnlBotonActualizar.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar el grupo");
+            }
+        }
+
         private void EliminarGrupo()
         {
-            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este grupo?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
+            if (dgvGrupos.SelectedRows.Count > 0)
             {
-                if (dgvGrupos.SelectedRows.Count > 0)
+                DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este grupo?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
                 {
-                    int id = Convert.ToInt32(dgvGrupos.SelectedRows[0].Cells[0].Value);
+                    int id = Convert.ToInt32(dgvGrupos.SelectedRows[0].Cells["ID"].Value);
                     if (consultaGrupos.EliminarGrupo(id))
                     {
                         MessageBox.Show("Grupo eliminado correctamente");
                         CargarGrupos();
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione un grupo para eliminar");
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar el grupo");
+                    }
                 }
             }
-        }
-        private void EditarGrupo()
-        {
-            if (dgvGrupos.SelectedRows.Count > 0)
+            else
             {
-                grupoId = Convert.ToInt32(dgvGrupos.SelectedRows[0].Cells[0].Value);
-                txtGrupo.Text = dgvGrupos.SelectedRows[0].Cells[1].Value.ToString();
-                txtNumAlumnos.Text = dgvGrupos.SelectedRows[0].Cells[2].Value.ToString();
-                cmbCarrera.Text = dgvGrupos.SelectedRows[0].Cells[3].Value.ToString();
+                MessageBox.Show("Seleccione un grupo para eliminar");
             }
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void LimpiarCampos()
         {
-            FormMenuPrincipal formMenuPrincipal = new FormMenuPrincipal();
-            formMenuPrincipal.Show();
-            this.Hide();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormGrupos_Load(object sender, EventArgs e)
-        {
-
+            txtGrupo.Clear();
+            txtNumAlumnos.Clear();
+            cmbCarrera.SelectedIndex = -1;
+            grupoId = 0;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -134,11 +121,9 @@ namespace AsignacionAcademica
             GuardarGrupo();
         }
 
-        private void btnLimpiar_Click(object sender, EventArgs e)
+        private void btnActualizar_Click(object sender, EventArgs e)
         {
-            LimpiarCampos();
-            btnLimpiar.Text = "Limpiar";
-            pnlBotonActualizar.Visible = false;
+            ActualizarGrupo();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -150,33 +135,14 @@ namespace AsignacionAcademica
         {
             EditarGrupo();
             pnlBotonActualizar.Visible = true;
-            btnLimpiar.Text = "Cancelar";
         }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            gestionGrupos.grupo = txtGrupo.Text;
-            gestionGrupos.numAlumnos = int.Parse(txtNumAlumnos.Text);
-            gestionGrupos.carrera = cmbCarrera.Text;
-
-            if (consultaGrupos.EditarGrupos(gestionGrupos, grupoId))
-            {
-                MessageBox.Show("Grupo actualizada correctamente");
-                CargarGrupos();
-                LimpiarCampos();
-                pnlBotonActualizar.Visible = false;
-                btnLimpiar.Text = "Limpiar";
-            }
-        }
-
-        private void lblTitulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvGrupos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            LimpiarCampos();
+            pnlBotonActualizar.Visible = false;
         }
     }
+
+
 }

@@ -68,7 +68,6 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(159, 23);
             txtNombre.TabIndex = 1;
-            txtNombre.TextChanged += textBox1_TextChanged;
             // 
             // lblEspecialidad
             // 
@@ -115,8 +114,7 @@
             btnEliminar.TabIndex = 10;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += button3_Click;
-            // 
+;            // 
             // btnLimpiar
             // 
             btnLimpiar.Location = new Point(250, 175);
@@ -281,7 +279,6 @@
             Controls.Add(lblNombre);
             Name = "FormProfesores";
             Text = "FormProfesores";
-            Load += FormProfesores_Load;
             pnlBotonActualizar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvProfesores).EndInit();
             ResumeLayout(false);

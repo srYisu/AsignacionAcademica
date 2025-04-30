@@ -1,5 +1,4 @@
-﻿using AsignacionAcademica.profesores;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,19 +12,13 @@ namespace AsignacionAcademica
 {
     public partial class FormProfesores : Form
     {
-        private List<GestionProfesores> profesores;
-        Conexion c = new Conexion();
         private ConsultaProfesores consultaProfesores;
-        private GestionProfesores gestionProfesores;
+        private int profesorId = 0;
 
-        int profesorId = 0;
         public FormProfesores()
         {
             InitializeComponent();
-            configTabla();
-            profesores = new List<GestionProfesores>();
             consultaProfesores = new ConsultaProfesores();
-            gestionProfesores = new GestionProfesores();
             CargarProfesores();
             pnlBotonActualizar.Visible = false;
         }
@@ -37,70 +30,28 @@ namespace AsignacionAcademica
             this.Hide();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void CargarProfesores()
         {
-
+            dgvProfesores.DataSource = consultaProfesores.ConsultarProfesores();
         }
 
-        private void FormProfesores_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            EliminarProfesor();
-        }
-        private void configTabla()
-        {
-            // Configuración de la tabla
-            dgvProfesores.AllowUserToAddRows = false;
-
-            dgvProfesores.Columns.Add("id", "ID");
-            dgvProfesores.Columns.Add("nombre", "Nombre");
-            dgvProfesores.Columns.Add("apellidoP", "Apellido paterno");
-            dgvProfesores.Columns.Add("apellidoM", "Apellido materno");
-            dgvProfesores.Columns.Add("especialidad", "Especialidad");
-
-            // Establecer el modo de selección de filas
-            dgvProfesores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        }
-        private void CargarProfesores(string filtro = "")
-        {
-            dgvProfesores.Rows.Clear();
-            dgvProfesores.Refresh();
-            profesores.Clear();
-            profesores = consultaProfesores.GetProfesores(filtro);
-
-            for (int i = 0; i < profesores.Count; i++)
-            {
-                dgvProfesores.Rows.Add
-                    (profesores[i].id,
-                    profesores[i].nombre,
-                    profesores[i].apellidoPaterno,
-                    profesores[i].apellidoMaterno,
-                    profesores[i].especialidad);
-            }
-        }
         private void GuardarProfesor()
         {
-            gestionProfesores.nombre = txtNombre.Text;
-            gestionProfesores.apellidoPaterno = txtApellidoPaterno.Text;
-            gestionProfesores.apellidoMaterno = txtApellidoMaterno.Text;
-            gestionProfesores.especialidad = txtEspecialidad.Text;
+            string nombre = txtNombre.Text;
+            string apellidoPaterno = txtApellidoPaterno.Text;
+            string apellidoMaterno = txtApellidoMaterno.Text;
+            string especialidad = txtEspecialidad.Text;
 
-            if (consultaProfesores.AgregarProfesor(gestionProfesores))
+            if (consultaProfesores.GuardarProfesor(nombre, apellidoPaterno, apellidoMaterno, especialidad))
             {
                 MessageBox.Show("Profesor agregado correctamente");
                 CargarProfesores();
                 LimpiarCampos();
             }
-
+            else
+            {
+                MessageBox.Show("Error al agregar el profesor");
+            }
         }
 
         private void EditarProfesor()
@@ -113,20 +64,38 @@ namespace AsignacionAcademica
                 txtApellidoMaterno.Text = dgvProfesores.SelectedRows[0].Cells[3].Value.ToString();
                 txtEspecialidad.Text = dgvProfesores.SelectedRows[0].Cells[4].Value.ToString();
             }
+            else
+            {
+                MessageBox.Show("Seleccione un profesor para editar");
+            }
         }
-        private void LimpiarCampos()
+
+        private void ActualizarProfesor()
         {
-            txtNombre.Clear();
-            txtApellidoPaterno.Clear();
-            txtApellidoMaterno.Clear();
-            txtEspecialidad.Clear();
+            string nombre = txtNombre.Text;
+            string apellidoPaterno = txtApellidoPaterno.Text;
+            string apellidoMaterno = txtApellidoMaterno.Text;
+            string especialidad = txtEspecialidad.Text;
+
+            if (consultaProfesores.ActualizarProfesor(profesorId, nombre, apellidoPaterno, apellidoMaterno, especialidad))
+            {
+                MessageBox.Show("Profesor actualizado correctamente");
+                CargarProfesores();
+                LimpiarCampos();
+                pnlBotonActualizar.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar el profesor");
+            }
         }
+
         private void EliminarProfesor()
         {
-            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este profesor?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
+            if (dgvProfesores.SelectedRows.Count > 0)
             {
-                if (dgvProfesores.SelectedRows.Count > 0)
+                DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este profesor?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
                 {
                     int id = Convert.ToInt32(dgvProfesores.SelectedRows[0].Cells[0].Value);
                     if (consultaProfesores.EliminarProfesor(id))
@@ -134,21 +103,30 @@ namespace AsignacionAcademica
                         MessageBox.Show("Profesor eliminado correctamente");
                         CargarProfesores();
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione un profesor para eliminar");
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar el profesor");
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("Seleccione un profesor para eliminar");
+            }
+        }
+
+        private void LimpiarCampos()
+        {
+            txtNombre.Clear();
+            txtApellidoPaterno.Clear();
+            txtApellidoMaterno.Clear();
+            txtEspecialidad.Clear();
+            profesorId = 0;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             GuardarProfesor();
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -158,6 +136,12 @@ namespace AsignacionAcademica
             btnLimpiar.Text = "Cancelar";
         }
 
+        private void btnActualizar_Click_1(object sender, EventArgs e)
+        {
+            ActualizarProfesor();
+            btnLimpiar.Text = "Limpiar";
+        }
+
         private void btnLimpiar_Click_1(object sender, EventArgs e)
         {
             LimpiarCampos();
@@ -165,22 +149,11 @@ namespace AsignacionAcademica
             btnLimpiar.Text = "Limpiar";
         }
 
-        private void btnActualizar_Click_1(object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
-            gestionProfesores.nombre = txtNombre.Text;
-            gestionProfesores.apellidoPaterno = txtApellidoPaterno.Text;
-            gestionProfesores.apellidoMaterno = txtApellidoMaterno.Text;
-            gestionProfesores.especialidad = txtEspecialidad.Text;
-
-            if (consultaProfesores.EditarProfesor(gestionProfesores, profesorId))
-            {
-                MessageBox.Show("Profesor actualizado correctamente");
-                CargarProfesores();
-                LimpiarCampos();
-                pnlBotonActualizar.Visible = false;
-            }
-            btnLimpiar.Text = "Limpiar";
+            EliminarProfesor();
         }
     }
+
 
 }

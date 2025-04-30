@@ -1,156 +1,124 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace AsignacionAcademica.aulas
 {
     internal class consultaAulas
     {
         private Conexion conexion;
+
         public consultaAulas()
         {
             conexion = new Conexion();
         }
 
-        public List<GestionAulas> GetAulas(string filtro)
+        // Método para agregar un aula
+        public bool GuardarAula(string nombre, int capacidad, string ubicacion)
         {
-            List<GestionAulas> aulas = new List<GestionAulas>();
-            string query = "SELECT * FROM aulas";
-            MySqlDataReader reader = null;
-
-            if (!string.IsNullOrWhiteSpace(filtro))
-            {
-                query += " WHERE nombre LIKE @filtro OR apellidoP LIKE @filtro OR apellidoM LIKE @filtro OR especialidad LIKE @filtro";
-            }
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
+                conn.Open();
+                string query = @"INSERT INTO aulas (nombre, capacidad, ubicacion) 
+                                 VALUES (@nombre, @capacidad, @ubicacion)";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        if (!string.IsNullOrWhiteSpace(filtro))
-                            cmd.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@capacidad", capacidad);
+                    cmd.Parameters.AddWithValue("@ubicacion", ubicacion);
 
-                        reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            aulas.Add(new GestionAulas
-                            {
-                                id = reader.GetInt32("idAulas"),
-                                nombre = reader.GetString("nombre"),
-                                capacidad = reader.GetInt32("capacidad"),
-                                ubicacion = reader.GetString("ubicacion"),
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al obtener aulas: " + ex.Message);
-                }
-                finally
-                {
-                    reader?.Close();
-                }
-            }
-
-            return aulas;
-        }
-
-        public bool AgregarAula(GestionAulas aulas)
-        {
-            string query = "INSERT INTO aulas (nombre, capacidad, ubicacion) VALUES (@nombre, @capacidad, @ubicacion)";
-
-            using (MySqlConnection conn = conexion.ObtenerConexion())
-            {
-                try
-                {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", aulas.nombre);
-                        cmd.Parameters.AddWithValue("@capacidad", aulas.capacidad);
-                        cmd.Parameters.AddWithValue("@ubicacion", aulas.ubicacion);
-
-                        return cmd.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al agregar profesor: " + ex.Message);
-                    return false;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }
 
-        public bool EditarAula(GestionAulas aulas, int id)
+        // Método para eliminar un aula
+        public bool EliminarAula(int idAula)
         {
-            string query = $"UPDATE aulas SET nombre=@nombre, capacidad=@capacidad, ubicacion=@ubicacion WHERE idAulas={id}";
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
-                {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", aulas.nombre);
-                        cmd.Parameters.AddWithValue("@capacidad", aulas.capacidad);
-                        cmd.Parameters.AddWithValue("@ubicacion", aulas.ubicacion);
+                conn.Open();
 
-                        return cmd.ExecuteNonQuery() > 0;
+                // Verificar si el aula tiene clases asignadas
+                string queryVerificar = @"SELECT COUNT(*) FROM clases WHERE aula_id = @idAula";
+                using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificar, conn))
+                {
+                    cmdVerificar.Parameters.AddWithValue("@idAula", idAula);
+                    int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                    if (clasesAsignadas > 0)
+                    {
+                        MessageBox.Show("Esta aula tiene clases asignadas. Elimina las clases primero.");
+                        return false;
                     }
                 }
-                catch (Exception ex)
+
+                // Eliminar el aula si no tiene clases asignadas
+                string queryEliminar = @"DELETE FROM aulas WHERE idAulas = @idAula";
+                using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
                 {
-                    MessageBox.Show("Error al editar aulas: " + ex.Message);
-                    return false;
+                    cmdEliminar.Parameters.AddWithValue("@idAula", idAula);
+                    return cmdEliminar.ExecuteNonQuery() > 0;
                 }
             }
         }
 
-        public bool EliminarAula(int id)
+        // Método para actualizar un aula
+        public bool ActualizarAula(int idAula, string nombre, int capacidad, string ubicacion)
         {
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
-                try
+                conn.Open();
+                string query = @"UPDATE aulas 
+                                 SET nombre = @nombre, capacidad = @capacidad, ubicacion = @ubicacion 
+                                 WHERE idAulas = @idAula";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    conn.Open();
+                    cmd.Parameters.AddWithValue("@idAula", idAula);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@capacidad", capacidad);
+                    cmd.Parameters.AddWithValue("@ubicacion", ubicacion);
 
-                    // Verificar si el aula tiene clases asignadas
-                    string queryVerificarClases = "SELECT COUNT(*) FROM clases WHERE aula_id = @id";
-                    using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificarClases, conn))
-                    {
-                        cmdVerificar.Parameters.AddWithValue("@id", id);
-                        int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
-
-                        if (clasesAsignadas > 0)
-                        {
-                            MessageBox.Show("Esta aula se encuentra asignada a una clase. Elimina la clase primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return false;
-                        }
-                    }
-
-                    // Eliminar el aula si no tiene clases asignadas
-                    string queryEliminar = "DELETE FROM aulas WHERE idAulas = @id";
-                    using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
-                    {
-                        cmdEliminar.Parameters.AddWithValue("@id", id);
-                        return cmdEliminar.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al eliminar aula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }
 
+        // Método para consultar todas las aulas
+        public DataTable ConsultarAulas()
+        {
+            using (MySqlConnection conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+                string query = @"SELECT idAulas AS ID, 
+                                        nombre AS Nombre, 
+                                        capacidad AS Capacidad, 
+                                        ubicacion AS Ubicacion
+                                 FROM aulas";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+
+        // Método para obtener un aula por ID
+        public DataRow ObtenerAulaPorId(int idAula)
+        {
+            using (MySqlConnection conn = conexion.ObtenerConexion())
+            {
+                conn.Open();
+                string query = @"SELECT * FROM aulas WHERE idAulas = @idAula";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@idAula", idAula);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                    return dt.Rows[0];
+                else
+                    return null;
+            }
+        }
     }
 }
+

@@ -79,7 +79,6 @@
             lblGrupo.Size = new Size(40, 15);
             lblGrupo.TabIndex = 35;
             lblGrupo.Text = "Grupo";
-            lblGrupo.Click += label1_Click;
             // 
             // txtNumAlumnos
             // 
@@ -229,7 +228,6 @@
             dgvGrupos.ThemeStyle.RowsStyle.Height = 25;
             dgvGrupos.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvGrupos.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dgvGrupos.CellContentClick += dgvGrupos_CellContentClick;
             // 
             // lblTitulo
             // 
@@ -241,7 +239,6 @@
             lblTitulo.Size = new Size(133, 47);
             lblTitulo.TabIndex = 48;
             lblTitulo.Text = "Grupos";
-            lblTitulo.Click += lblTitulo_Click;
             // 
             // FormGrupos
             // 
@@ -264,7 +261,6 @@
             Controls.Add(txtGrupo);
             Name = "FormGrupos";
             Text = "FormGrupos";
-            Load += FormGrupos_Load;
             pnlBotonActualizar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvGrupos).EndInit();
             ResumeLayout(false);

@@ -226,7 +226,6 @@
             dgvAulas.ThemeStyle.RowsStyle.Height = 25;
             dgvAulas.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvAulas.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dgvAulas.CellContentClick += dgvAulas_CellContentClick;
             // 
             // lblTitulo
             // 
@@ -260,7 +259,6 @@
             Controls.Add(btnGuardar);
             Name = "FormAulas";
             Text = "FormAulas";
-            Load += FormAulas_Load;
             pnlBotonActualizar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvAulas).EndInit();
             ResumeLayout(false);

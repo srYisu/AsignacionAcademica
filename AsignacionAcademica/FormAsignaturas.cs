@@ -1,120 +1,107 @@
 ﻿using AsignacionAcademica.asignaturas;
-using AsignacionAcademica.aulas;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AsignacionAcademica
 {
     public partial class FormAsignaturas : Form
     {
-        private List<GestionAsignaturas> asignaturas;
-        Conexion Conexion;
         private consultaAsignaturas consultaAsignaturas;
-        private GestionAsignaturas gestionAsignaturas;
-        int asignaturaId = 0;
+        private int asignaturaId = 0;
+
         public FormAsignaturas()
         {
             InitializeComponent();
-            pnlBotonActualizar.Visible = false;
-            configTabla();
-
-            asignaturas = new List<GestionAsignaturas>();
             consultaAsignaturas = new consultaAsignaturas();
-            gestionAsignaturas = new GestionAsignaturas();
-
             CargarAsignaturas();
+            pnlBotonActualizar.Visible = false;
         }
-        private void configTabla()
+
+        private void CargarAsignaturas()
         {
-            // Configuración de la tabla
-            dgvAsignaturas.AllowUserToAddRows = false;
-
-            dgvAsignaturas.Columns.Add("id", "ID");
-            dgvAsignaturas.Columns.Add("asignatura", "Asignatura");
-            dgvAsignaturas.Columns.Add("Tipo", "Tipo");
-
-            // Establecer el modo de selección de filas
-            dgvAsignaturas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAsignaturas.DataSource = consultaAsignaturas.ConsultarAsignaturas();
         }
-        private void CargarAsignaturas(string filtro = "")
-        {
-            dgvAsignaturas.Rows.Clear();
-            dgvAsignaturas.Refresh();
-            asignaturas.Clear();
-            asignaturas = consultaAsignaturas.GetAsignaturas(filtro);
 
-            for (int i = 0; i < asignaturas.Count; i++)
-            {
-                dgvAsignaturas.Rows.Add
-                    (asignaturas[i].id,
-                    asignaturas[i].asignatura,
-                    asignaturas[i].tipo);
-            }
-        }
         private void GuardarAsignatura()
         {
-            gestionAsignaturas.asignatura = txtAsignatura.Text;
-            gestionAsignaturas.tipo = cmbTipo.Text;
+            string asignatura = txtAsignatura.Text;
+            string tipo = cmbTipo.Text;
 
-            if (consultaAsignaturas.AgregarAsignatura(gestionAsignaturas))
+            if (consultaAsignaturas.GuardarAsignatura(asignatura, tipo))
             {
-                MessageBox.Show("Aula agregada correctamente");
+                MessageBox.Show("Asignatura agregada correctamente");
                 CargarAsignaturas();
                 LimpiarCampos();
             }
-
-        }
-        private void LimpiarCampos()
-        {
-            txtAsignatura.Clear();
-            cmbTipo.SelectedIndex = -1;
-        }
-        private void EliminarAsignaturas()
-        {
-            DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar esta asignatura?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
+            else
             {
-                if (dgvAsignaturas.SelectedRows.Count > 0)
+                MessageBox.Show("Error al agregar la asignatura");
+            }
+        }
+
+        private void EditarAsignatura()
+        {
+            if (dgvAsignaturas.SelectedRows.Count > 0)
+            {
+                asignaturaId = Convert.ToInt32(dgvAsignaturas.SelectedRows[0].Cells["ID"].Value);
+                txtAsignatura.Text = dgvAsignaturas.SelectedRows[0].Cells["Asignatura"].Value.ToString();
+                cmbTipo.Text = dgvAsignaturas.SelectedRows[0].Cells["Tipo"].Value.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una asignatura para editar");
+            }
+        }
+
+        private void ActualizarAsignatura()
+        {
+            string asignatura = txtAsignatura.Text;
+            string tipo = cmbTipo.Text;
+
+            if (consultaAsignaturas.ActualizarAsignatura(asignaturaId, asignatura, tipo))
+            {
+                MessageBox.Show("Asignatura actualizada correctamente");
+                CargarAsignaturas();
+                LimpiarCampos();
+                pnlBotonActualizar.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar la asignatura");
+            }
+        }
+
+        private void EliminarAsignatura()
+        {
+            if (dgvAsignaturas.SelectedRows.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar esta asignatura?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
                 {
-                    int id = Convert.ToInt32(dgvAsignaturas.SelectedRows[0].Cells[0].Value);
+                    int id = Convert.ToInt32(dgvAsignaturas.SelectedRows[0].Cells["ID"].Value);
                     if (consultaAsignaturas.EliminarAsignatura(id))
                     {
                         MessageBox.Show("Asignatura eliminada correctamente");
                         CargarAsignaturas();
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione una asignatura para eliminar");
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar la asignatura");
+                    }
                 }
             }
-        }
-        private void EditarAsignatura()
-        {
-            if (dgvAsignaturas.SelectedRows.Count > 0)
+            else
             {
-                asignaturaId = Convert.ToInt32(dgvAsignaturas.SelectedRows[0].Cells[0].Value);
-                txtAsignatura.Text = dgvAsignaturas.SelectedRows[0].Cells[1].Value.ToString();
-                cmbTipo.Text = dgvAsignaturas.SelectedRows[0].Cells[2].Value.ToString();
+                MessageBox.Show("Seleccione una asignatura para eliminar");
             }
         }
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            FormMenuPrincipal formMenuPrincipal = new FormMenuPrincipal();
-            formMenuPrincipal.Show();
-            this.Hide();
-        }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
+        private void LimpiarCampos()
         {
-
+            txtAsignatura.Clear();
+            cmbTipo.SelectedIndex = -1;
+            asignaturaId = 0;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -122,38 +109,26 @@ namespace AsignacionAcademica
             GuardarAsignatura();
         }
 
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            ActualizarAsignatura();
+        }
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            EliminarAsignaturas();
+            EliminarAsignatura();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
             EditarAsignatura();
             pnlBotonActualizar.Visible = true;
-            btnLimpiar.Text = "Cancelar";
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            pnlBotonActualizar.Visible = false;
             LimpiarCampos();
-            btnLimpiar.Text = "Limpiar";
-        }
-
-        private void btnActualizar_Click_1(object sender, EventArgs e)
-        {
-            gestionAsignaturas.asignatura = txtAsignatura.Text;
-            gestionAsignaturas.tipo = cmbTipo.Text;
-
-            if (consultaAsignaturas.EditarAsignatura(gestionAsignaturas, asignaturaId))
-            {
-                MessageBox.Show("Asignatura actualizada correctamente");
-                CargarAsignaturas();
-                LimpiarCampos();
-                pnlBotonActualizar.Visible = false;
-                btnLimpiar.Text = "Limpiar";
-            }
+            pnlBotonActualizar.Visible = false;
         }
     }
 }

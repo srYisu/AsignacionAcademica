@@ -140,7 +140,6 @@
             btnActualizar.TabIndex = 20;
             btnActualizar.Text = "Actualizar";
             btnActualizar.UseVisualStyleBackColor = true;
-            btnActualizar.Click += btnActualizar_Click_1;
             // 
             // dgvAsignaturas
             // 
