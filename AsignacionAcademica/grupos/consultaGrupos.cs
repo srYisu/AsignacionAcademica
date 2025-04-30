@@ -117,25 +117,41 @@ namespace AsignacionAcademica.grupos
 
         public bool EliminarGrupo(int id)
         {
-            string query = "DELETE FROM grupos WHERE idGrupos=@id";
-
             using (MySqlConnection conn = conexion.ObtenerConexion())
             {
                 try
                 {
                     conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+
+                    // Verificar si el grupo tiene clases asignadas
+                    string queryVerificarClases = "SELECT COUNT(*) FROM clases WHERE grupo_id = @id";
+                    using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificarClases, conn))
                     {
-                        cmd.Parameters.AddWithValue("@id", id);
-                        return cmd.ExecuteNonQuery() > 0;
+                        cmdVerificar.Parameters.AddWithValue("@id", id);
+                        int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                        if (clasesAsignadas > 0)
+                        {
+                            MessageBox.Show("Este grupo se encuentra asignado a una clase. Elimina la clase primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+                    }
+
+                    // Eliminar el grupo si no tiene clases asignadas
+                    string queryEliminar = "DELETE FROM grupos WHERE idGrupos = @id";
+                    using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
+                    {
+                        cmdEliminar.Parameters.AddWithValue("@id", id);
+                        return cmdEliminar.ExecuteNonQuery() > 0;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al eliminar grupo: " + ex.Message);
+                    MessageBox.Show("Error al eliminar grupo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
         }
+
     }
 }

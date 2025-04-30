@@ -118,26 +118,41 @@ namespace AsignacionAcademica
         }
 
         public bool EliminarProfesor(int id)
+{
+    using (MySqlConnection conn = conexion.ObtenerConexion())
+    {
+        try
         {
-            string query = "DELETE FROM profesores WHERE idProfesores=@id";
+            conn.Open();
 
-            using (MySqlConnection conn = conexion.ObtenerConexion())
+            // Verificar si el profesor tiene clases asignadas
+            string queryVerificarClases = "SELECT COUNT(*) FROM clases WHERE profesor_id = @id";
+            using (MySqlCommand cmdVerificar = new MySqlCommand(queryVerificarClases, conn))
             {
-                try
+                cmdVerificar.Parameters.AddWithValue("@id", id);
+                int clasesAsignadas = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                if (clasesAsignadas > 0)
                 {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@id", id);
-                        return cmd.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al eliminar profesor: " + ex.Message);
+                    MessageBox.Show("Este profesor se encuentra asignado a una clase. Elimina la clase primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
+
+            // Eliminar el profesor si no tiene clases asignadas
+            string queryEliminar = "DELETE FROM profesores WHERE idProfesores = @id";
+            using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
+            {
+                cmdEliminar.Parameters.AddWithValue("@id", id);
+                return cmdEliminar.ExecuteNonQuery() > 0;
+            }
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error al eliminar profesor: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    }
+}
     }
 }

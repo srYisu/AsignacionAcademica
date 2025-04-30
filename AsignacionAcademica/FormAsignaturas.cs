@@ -89,10 +89,6 @@ namespace AsignacionAcademica
                         MessageBox.Show("Asignatura eliminada correctamente");
                         CargarAsignaturas();
                     }
-                    else
-                    {
-                        MessageBox.Show("Error al eliminar la asignatura");
-                    }
                 }
                 else
                 {

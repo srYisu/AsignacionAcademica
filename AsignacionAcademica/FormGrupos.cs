@@ -94,10 +94,6 @@ namespace AsignacionAcademica
                         MessageBox.Show("Grupo eliminado correctamente");
                         CargarGrupos();
                     }
-                    else
-                    {
-                        MessageBox.Show("Error al eliminar el grupo");
-                    }
                 }
                 else
                 {

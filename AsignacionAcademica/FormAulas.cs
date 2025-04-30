@@ -92,10 +92,6 @@ namespace AsignacionAcademica
                         MessageBox.Show("Aula eliminada correctamente");
                         CargarAulas();
                     }
-                    else
-                    {
-                        MessageBox.Show("Error al eliminar el aula");
-                    }
                 }
                 else
                 {

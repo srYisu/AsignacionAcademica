@@ -134,10 +134,6 @@ namespace AsignacionAcademica
                         MessageBox.Show("Profesor eliminado correctamente");
                         CargarProfesores();
                     }
-                    else
-                    {
-                        MessageBox.Show("Error al eliminar el profesor");
-                    }
                 }
                 else
                 {
